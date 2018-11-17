@@ -3,8 +3,7 @@
 The new approach to web presentation.
 
 * Static website by [KUEHNE-Webdienste.de](https://kuehne-webdienste.de) powered by vue, nuxt, netlify
-* deployed at https://loving-kowalevski-d056fa.netlify.com/
-*
+* deployed at https://loving-kowalevski-d056fa.netlify.com/ -- changed to https://kuehne-webseiten.netlify.com/
 
 ## Build Setup
 
