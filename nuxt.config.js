@@ -11,7 +11,12 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/png', href: '/kwd4-favicon-alpha.png' }
-    ]
+  	],
+	script: [
+		{
+			src: "https://identity.netlify.com/v1/netlify-identity-widget.js"
+		}
+	]
   },
   /*
   ** Customize the progress bar color
