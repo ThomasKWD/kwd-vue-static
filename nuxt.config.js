@@ -7,10 +7,10 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'kwd static website powered by vuewebsite powered by ' }
+      { hid: 'description', name: 'description', content: 'kwd static website powered by vue' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/kwd4-favicon-alpha.png' }
     ]
   },
   /*
@@ -36,4 +36,3 @@ module.exports = {
     }
   }
 }
-

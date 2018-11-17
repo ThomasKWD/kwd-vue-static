@@ -1,6 +1,10 @@
-# kwd-vue-static
+# KWD website
 
-> kwd static website powered by vuewebsite powered by 
+The new approach to web presentation.
+
+* Static website by [KUEHNE-Webdienste.de](https://kuehne-webdienste.de) powered by vue, nuxt, netlify
+* deployed at https://loving-kowalevski-d056fa.netlify.com/
+*
 
 ## Build Setup
 
@@ -20,4 +24,3 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
-

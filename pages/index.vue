@@ -1,23 +1,28 @@
 <template>
   <section class="container">
     <div>
+		<img src="/kwd-4-title.png">
       <app-logo/>
       <h1 class="title">
-        kwd-vue-static
+        KÜHNE-Webseiten.de
       </h1>
       <h2 class="subtitle">
-        kwd static website powered by vuewebsite powered by 
+        Willkommen auf der neuen Website im Material Design!
       </h2>
+	  <p> powered by:</p>
       <div class="links">
         <a
           href="https://nuxtjs.org/"
           target="_blank"
-          class="button--green">Documentation</a>
+          class="button--green">Nuxt</a>
         <a
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey">GitHub</a>
       </div>
+	  <div class="links">
+	  	<p>&copy; 2018 by <a href="https://kuehne-webdienste.de">Kühne-Webdienste.de</a></p>
+		</div>
     </div>
   </section>
 </template>
@@ -62,4 +67,3 @@ export default {
   padding-top: 15px;
 }
 </style>
-
