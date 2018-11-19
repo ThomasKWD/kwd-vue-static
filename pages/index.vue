@@ -1,10 +1,11 @@
 <template>
   <section class="container">
     <div>
+		<page-header/>
 		<img src="/kwd-4-title.png">
       <app-logo/>
       <h1 class="title">
-        KÜHNE-Webseiten.de
+        {{projectTitle}}
       </h1>
       <h2 class="subtitle">
         Willkommen auf der neuen Website im Material Design!
@@ -20,20 +21,27 @@
           target="_blank"
           class="button--grey">GitHub</a>
       </div>
-	  <div class="links">
-	  	<p>&copy; 2018 by <a href="https://kuehne-webdienste.de">Kühne-Webdienste.de</a></p>
-		</div>
+	  
+		<page-footer/>
     </div>
   </section>
 </template>
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
+import PageHeader from '~/components/DefaultHeader.vue' //you can use any name
+import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
 
 export default {
-  components: {
-    AppLogo
-  }
+	asyncData : function() {
+		return  {
+			projectTitle : 'KÜHNE-Webseiten.de'
+		}
+	},
+	components:
+		{
+			AppLogo,PageHeader,PageFooter
+		}
 }
 </script>
 

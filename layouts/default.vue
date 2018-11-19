@@ -49,5 +49,9 @@ html {
   color: #fff;
   background-color: #35495e;
 }
-</style>
 
+.main-page-region {
+	margin:30px;
+	padding: 30px;
+}
+</style>
