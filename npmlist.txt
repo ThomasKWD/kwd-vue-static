@@ -1,0 +1,3 @@
+kwd-vue-static@1.0.0 C:\Users\G752VL\Documents\kwd\kwd-vue-static
+`-- nuxt@2.3.1 
+

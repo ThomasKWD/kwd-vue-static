@@ -20,8 +20,9 @@
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey">GitHub</a>
+		 <div class="blog-post">{{markdownBlog}}</div>
       </div>
-	  
+
 		<page-footer/>
     </div>
   </section>
@@ -31,11 +32,16 @@
 import AppLogo from '~/components/AppLogo.vue'
 import PageHeader from '~/components/DefaultHeader.vue' //you can use any name
 import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
+const cmsPosts = require('extended-netlify-cms-loader?collection=blog!../static/admin/config.yml')
+var markDownIt = require('markdown-it')
+var md = new markDownIt();
 
 export default {
 	asyncData : function() {
 		return  {
-			projectTitle : 'KÜHNE-Webseiten.de'
+			projectTitle : 'KÜHNE-Webseiten.de',
+			// markdownBlog : cmsPosts[0].body
+			markdownBlog : md.render(cmsPosts[0].body)
 		}
 	},
 	components:
