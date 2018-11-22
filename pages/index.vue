@@ -80,4 +80,10 @@ export default {
 .links {
   padding-top: 15px;
 }
+
+/* how to use sass or JS-styles ?? */
+.blog-post blockquote {
+	border-left: 2px solid #080;
+	padding-left: 1em;
+}
 </style>
