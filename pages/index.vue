@@ -20,7 +20,7 @@
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey">GitHub</a>
-		 <div class="blog-post">{{markdownBlog}}</div>
+		 <div class="blog-post" v-html="markdownBlogHtml"></div>
       </div>
 
 		<page-footer/>
@@ -41,7 +41,7 @@ export default {
 		return  {
 			projectTitle : 'KÜHNE-Webseiten.de',
 			// markdownBlog : cmsPosts[0].body
-			markdownBlog : md.render(cmsPosts[0].body)
+			markdownBlogHtml : md.render(cmsPosts[0].body)
 		}
 	},
 	components:
