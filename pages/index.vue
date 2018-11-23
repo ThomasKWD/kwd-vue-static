@@ -1,8 +1,8 @@
+<!-- test comment paul -->
 <template>
   <section class="container">
     <div>
-		<page-header/>
-		<img src="/kwd-4-title.png">
+
       <app-logo/>
       <h1 class="title">
         {{projectTitle}}
@@ -30,23 +30,22 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
-import PageHeader from '~/components/DefaultHeader.vue' //you can use any name
 import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
-const cmsPosts = require('extended-netlify-cms-loader?collection=blog!../static/admin/config.yml')
-var markDownIt = require('markdown-it')
-var md = new markDownIt();
+// const cmsPosts = require('extended-netlify-cms-loader?collection=blog!../static/admin/config.yml')
+// var markDownIt = require('markdown-it')
+// var md = new markDownIt();
 
 export default {
 	asyncData : function() {
 		return  {
 			projectTitle : 'KÜHNE-Webseiten.de',
 			// markdownBlog : cmsPosts[0].body
-			markdownBlogHtml : md.render(cmsPosts[0].body)
+			// markdownBlogHtml : md.render(cmsPosts[0].body)
 		}
 	},
 	components:
 		{
-			AppLogo,PageHeader,PageFooter
+			AppLogo,PageFooter
 		}
 }
 </script>

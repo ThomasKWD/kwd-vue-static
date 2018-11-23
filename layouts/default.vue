@@ -1,8 +1,27 @@
 <template>
   <div>
+	  <page-header/>
     <nuxt/>
   </div>
 </template>
+
+<script>
+import PageHeader from '~/components/DefaultHeader.vue' //you can use any name
+
+export default {
+	// asyncData : function() {
+	// 	return  {
+	// 		projectTitle : 'KÜHNE-Webseiten.de',
+	// 		// markdownBlog : cmsPosts[0].body
+	// 		markdownBlogHtml : md.render(cmsPosts[0].body)
+	// 	}
+	// },
+	components:
+		{
+			PageHeader
+		}
+}
+</script>
 
 <style>
 html {
