@@ -7,7 +7,7 @@ Displays preview list of blogs, which can be used on different pages
 <nav>
 	<ul>
 		<li v-for="b in blogs" v-bind:key="b.id">
-		    <a href="/">{{ b.title }}</a>
+		    <nuxt-link v-bind:to="'/blog/'+b.id">{{ b.title }}</nuxt-link>
 		  </li>
 	</ul>
 

@@ -11,7 +11,8 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'KÜHNE-Webseiten',
+    // titleTemplate: '%s - KÜHNE-Webseiten',
+	title: 'Hoome',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -5,7 +5,7 @@
 		</div>
 		<div>
 			<nuxt-link to="/">Home</nuxt-link> |
-			<nuxt-link to="/blog">Blog</nuxt-link> |
+			<nuxt-link to="/blogs">Blog</nuxt-link> |
 			<nuxt-link to="/referenzen">Referenzen</nuxt-link> |
 			<nuxt-link to="/kontakt">Kontakt</nuxt-link>
 		</div>

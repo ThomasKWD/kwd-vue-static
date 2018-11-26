@@ -20,7 +20,6 @@
           href="https://github.com/nuxt/nuxt.js"
           target="_blank"
           class="button--grey">GitHub</a>
-		 <div class="blog-post" v-html="markdownBlogHtml"></div>
       </div>
 
 		<page-footer/>
@@ -35,18 +34,25 @@ import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
 // var markDownIt = require('markdown-it')
 // var md = new markDownIt();
 
+var projectTitle = 'KÜHNE-Webseiten.de';
+
 export default {
 	asyncData : function() {
 		return  {
-			projectTitle : 'KÜHNE-Webseiten.de',
+			projectTitle : projectTitle
 			// markdownBlog : cmsPosts[0].body
 			// markdownBlogHtml : md.render(cmsPosts[0].body)
+			// us like: <div class="blog-post" v-html="markdownBlogHtml"></div>
 		}
 	},
-	components:
-		{
-			AppLogo,PageFooter
-		}
+	components : {
+		AppLogo,PageFooter
+	},
+	head () {
+			return {
+				title : projectTitle
+			}
+	}
 }
 </script>
 
