@@ -1,4 +1,7 @@
+Interesting that a text here is ignored and thus can be used as *comment*.
+
 actually you would need a base page template (see layouts) which contains structures which
+
 <template>
 	<main class="blog-page">
 		<h1>Blog</h1>
