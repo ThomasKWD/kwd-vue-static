@@ -16,7 +16,6 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 				  </li>
 			</ul>
 		</nav>
-		<p>{{references}}</p>
 	</main>
 </template>
 
@@ -24,6 +23,7 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 import axios from 'axios'
 
 export default {
+	// this coding delays display more than the async asyncData style in _ide.vue
 	mounted () {
 		axios
 			// .get('https://api.coindesk.com/v1/bpi/currentprice.json')
