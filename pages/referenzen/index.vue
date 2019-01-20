@@ -8,10 +8,10 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 -->
 <template>
 	<main class="blog-page">
-		<h1>{{referencesPageTitle}}</h1>
+		<h1>{{title}}</h1>
 		<nav>
 			<ul>
-				<li v-for="r in references" v-bind:key="r.id">
+				<li v-for="r in sub_articles" v-bind:key="r.id">
 					<nuxt-link v-bind:to="'/referenzen/'+r.id">{{ r.title }}</nuxt-link>
 				  </li>
 			</ul>
@@ -23,33 +23,27 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 import axios from 'axios'
 
 export default {
-	// this coding delays display more than the async asyncData style in _ide.vue
-	mounted () {
-		axios
-			// .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-			.get('https://www.kuehne-webdienste.de/api/articles/3/1')
-	        .then(response => {
-				this.references = response.data.sub_articles;
-				this.referencesPageTitle = response.data.title
-			})
-	},
-	data () {
-		return {
-			references : null,
-			referencesPageTitle : ''
-		}
-	}
-	// TODO: find out why below code not working:
-	// async asyncData({params}) {
-	// 	const { refData } = await axios.get('https://www.kuehne-webdienste.de/api/articles/3/1')
-	// 	// since there is no real marker (except checking the names of the root categories) we still need to hard code the id of entry point
-	//
-	// 	console.log ('refData following...')
-	// 	console.log ('refData following...')
+	// ! this approach does NOT lead to static content page index.html
+	// mounted () {
+	// 	axios
+	// 		// .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+	// 		.get('https://www.kuehne-webdienste.de/api/articles/3/1')
+	//         .then(response => {
+	// 			this.references = response.data.sub_articles;
+	// 			this.referencesPageTitle = response.data.title
+	// 		})
+	// },
+	// data () {
 	// 	return {
-	// 		// list contains subentries of article 3
-	// 		references : refData
+	// 		references : null,
+	// 		referencesPageTitle : ''
 	// 	}
 	// }
+
+	// - with this code you can access original field names of JSON in template above
+	async asyncData({params}) {
+		const { data } = await axios.get('https://www.kuehne-webdienste.de/api/articles/3/1') // without body content
+		return data;
+	}
 }
 </script>
