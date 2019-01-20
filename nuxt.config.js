@@ -47,7 +47,10 @@ module.exports = {
 				// console.log(articles)
 				// ??? why function map unknown
 				return res.data.sub_articles.map((sub_article) => {
-					return '/referenzen/' + sub_article.id
+					return {
+						route : '/referenzen/' + sub_article.id,
+						payload : sub_article
+					}
 				})
 			})
 		}

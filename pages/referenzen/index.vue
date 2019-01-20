@@ -8,7 +8,7 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 -->
 <template>
 	<main class="blog-page">
-		<h1>Referenzen</h1>
+		<h1>Referenzen, Auswahl</h1>
 		<nav>
 			<ul>
 				<li v-for="r in references" v-bind:key="r.id">

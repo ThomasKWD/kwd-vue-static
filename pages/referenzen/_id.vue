@@ -24,11 +24,29 @@ export default {
 	// 	}
 	// }
 
-	async asyncData({params}) {
-		// console.log('trying to request: ');
-		// console.log(`https://www.kuehne-webdienste.de/api/articles/${params.id}/1/content`)
-		// ! construct only working, if var is named 'data'
-		const { data } = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${params.id}/1/content`)
+	// async asyncData({params}) {
+	async asyncData(context) {
+
+		var result;
+		// ! only working, if var is named 'data'
+		var data = {};
+
+		// ! payload is only for 'nuxt generate' you will need to access axios directly when "nuxt"
+		if (context.payload) {
+			// data = context.payload.sub_article;
+			data = context.payload;
+			console.log(`payload for ${data.id} found`)
+			// console.log(context.payload)
+		}
+		else {
+			result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
+			data = result.data;
+		}
+
+		// const {data} = null;
+		// var data;
+		// }
+		// console.log(context);
 		// since there is no real marker (except checking the names of the root categories) we still need to hard code the id of entry point
 
 		// we should:
