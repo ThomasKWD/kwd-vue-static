@@ -1,3 +1,4 @@
+??? read
 <template>
 	<article class="blog-post">
 		<h1>{{title}}</h1>
@@ -9,12 +10,14 @@
 
 <script>
 import BlogList from '~/components/BlogList.vue' //you can use any name
+import constants from '~/modules/projectConstants'
+
 var markDownIt = require('markdown-it')
 var md = new markDownIt();
 
 export default {
 	async asyncData({params}) {
-		var postData = BlogList.data().blogs[params.id - 1];
+		var postData = BlogList.data().blogs[params.id - constants().netlifyBlogStartId -1 ]; // -1 because its an index
 		return {
 			title : postData.title,
 			markdownBlogHtml : md.render(postData.body)

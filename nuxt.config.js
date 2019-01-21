@@ -6,14 +6,14 @@ module.exports = {
 	*/
 	// modules: [
 	//     // Simple usage
-	//     "nuxt-netlify-cms"
+	//     "~/modules/projectConstants"
 	//   ],
 
 	/*
 	** Headers of the page
 	*/
 	head: {
-		title: 'Hoome',
+		title: 'Yuahse',
 		titleTemplate: '%s - KÜHNE-Webseiten',
 		meta: [
 			{ charset: 'utf-8' },
@@ -40,6 +40,9 @@ module.exports = {
 		routes: function () {
 			// article 3 contains list of sub categories of "References"
 			// ??? centralized const def. in project (also for pages generation)
+			// ??? you could build up the entire redaxo hierchy as routes
+			// ??? try to use the titles for paths, not just ids, for this make own converter from title
+			//     better: have a metainfo field in Redaxo which - if set - contains title for URL, otherwise build from normal title of article
 			return axios.get('https://www.kuehne-webdienste.de/api/articles/3/content')
 			.then((res) => {
 				// var articles = res.data.sub_articles;
