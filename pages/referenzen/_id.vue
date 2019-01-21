@@ -51,8 +51,8 @@ export default {
 
 		// we should:
 		// - extract and copy images
-		// - find and convert internal links, actually redaxo:// links are better to recognize than index.php?article_id links
 
+		// TODO: provide this as a separate module to be used in several templates
 		if (typeof data.body !== 'undefined') {
 			// make img links complete (cross reference possible???)
 			data.body = data.body.replace(/src="index.php/g,'src="https://www.kuehne-webdienste.de/index.php');
@@ -61,6 +61,8 @@ export default {
 			// ... redaxo link
 			// - actually you must read to parent category, check which type it is (e.g. Referenz or News), then make link accordingly like /referenzen/2 or blog/48
 			// - read article from redaxo link as json from kwd, check parent and decide (e.g. parent id == 3 then reference)
+
+			// ??? actually you must parse the structure of the project to tell if link should be under blog, reference or other
 			data.body = data.body.replace(/redaxo:\/\/(.*)"/g,'/blog/$1"');
 		}
 		return data; // ! data Object returned directly thus just include the fields e.g. {{title}}
