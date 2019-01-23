@@ -47,11 +47,6 @@ export default {
 	},
 	components : {
 		AppLogo,PageFooter
-	},
-	head () {
-			return {
-				title : projectTitle
-			}
 	}
 }
 </script>

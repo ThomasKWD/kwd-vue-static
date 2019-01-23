@@ -15,5 +15,12 @@ export default {
 		// - with this code you can access original field names of JSON in template above
 		const { data } = await axios.get('https://www.kuehne-webdienste.de/api/articles/2/1/content') // without body content
 		return data;
+	},
+	head () {
+		return {
+			// how to get from API call
+			title : 'Kontakt und Impressum'
+		}
 	}
+
 }</script>

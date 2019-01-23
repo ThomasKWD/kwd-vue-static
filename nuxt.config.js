@@ -1,4 +1,5 @@
 import axios from 'axios'
+import constants from './modules/projectConstants'
 
 module.exports = {
 	/*
@@ -13,7 +14,7 @@ module.exports = {
 	** Headers of the page
 	*/
 	head: {
-		title: 'Yuahse',
+		title: 'Home',
 		titleTemplate: '%s - KÜHNE-Webseiten',
 		meta: [
 			{ charset: 'utf-8' },
@@ -44,14 +45,14 @@ module.exports = {
 			// ??? try to use the titles for paths, not just ids, for this make own converter from title
 			//     better: have a metainfo field in Redaxo which - if set - contains title for URL, otherwise build from normal title of article
 			return axios.get('https://www.kuehne-webdienste.de/api/articles/3/content')
-			.then((res) => {
+			.then(({data}) => {
 				// var articles = res.data.sub_articles;
 				// console.log('--'+typeof articles )
 				// console.log(articles)
 				// ??? why function map unknown
-				return res.data.sub_articles.map((sub_article) => {
+				return data.sub_articles.map((sub_article) => {
 					return {
-						route : '/referenzen/' + sub_article.id,
+						route : '/'+constants.referencesPathName+'/' + sub_article.id,
 						payload : sub_article
 					}
 				})

@@ -1,5 +1,4 @@
-export default function () {
-	return {
-		netlifyBlogStartId : 1000
-	}
+export default  {
+	netlifyBlogStartId : 1000,
+	referencesPathName : 'referenzen'
 }

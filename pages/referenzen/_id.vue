@@ -66,6 +66,11 @@ export default {
 			data.body = data.body.replace(/redaxo:\/\/(.*)"/g,'/blog/$1"');
 		}
 		return data; // ! data Object returned directly thus just include the fields e.g. {{title}}
+	},
+	head () {
+		return {
+			title : this.title // must also be renamed when data has 'name'
+		}
 	}
 }
 </script>

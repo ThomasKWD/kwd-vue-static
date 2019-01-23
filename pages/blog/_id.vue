@@ -17,16 +17,25 @@ var md = new markDownIt();
 
 export default {
 	async asyncData({params}) {
-		var postData = BlogList.data().blogs[params.id - constants().netlifyBlogStartId -1 ]; // -1 because its an index
+		var postData = BlogList.data().blogs[params.id - constants.netlifyBlogStartId -1 ]; // -1 because its an index
 		return {
 			title : postData.title,
-			markdownBlogHtml : md.render(postData.body)
+			markdownBlogHtml : md.render(postData.body),
+			// head : function () {
+			// 	return {
+			// 		title : postData.title // gets title property from returned data
+			// 	}
+			// }
 		}
 	},
 	components:
 	{
 		BlogList
+	},
+	head () {
+		return {
+			title : this.title
+		}
 	}
-
 }
 </script>

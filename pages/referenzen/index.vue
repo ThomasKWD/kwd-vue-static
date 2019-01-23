@@ -44,6 +44,11 @@ export default {
 	async asyncData({params}) {
 		const { data } = await axios.get('https://www.kuehne-webdienste.de/api/articles/3/1') // without body content
 		return data;
+	},
+	head () {
+		return {
+			title : 'Referenzen'
+		}
 	}
 }
 </script>
