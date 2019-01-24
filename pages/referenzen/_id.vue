@@ -37,7 +37,7 @@ export default {
 		if (context.payload) {
 			// data = context.payload.sub_article;
 			data = context.payload;
-			console.log(`payload for ${data.id} found`)
+			console.log(`payload for reference ${data.id} found`)
 			// console.log(context.payload)
 		}
 		else {

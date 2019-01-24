@@ -38,12 +38,17 @@ export default {
 		if (context.payload) {
 			// data = context.payload.sub_article;
 			data = context.payload;
-			console.log(`payload for ${data.id} found`)
+			console.log(`payload for blog ${data.id} found`)
 			// console.log(context.payload)
 		}
 		else {
-			result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
-			data = result.data;
+			if (context.params.id > constants.netlifyBlogStartId) {
+				console.log(`found constants.netlifyBlogStartId: ${context.data.id}`)
+			}
+			else {
+				result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
+				data = result.data;
+			}
 		}
 
 		// TODO: provide this as a separate module to be used in several templates
@@ -58,8 +63,8 @@ export default {
 
 			// ??? actually you must parse the structure of the project to tell if link should be under blog, reference or other
 
-			// shuri ryu test fake
-			data.body = data.body.replace(/redaxo:\/\/12"/g,'/referenzen/12"');
+
+			data.body = data.body.replace(/redaxo:\/\/12"/g,'/referenzen/12"');// shuri ryu test fake
 			data.body = data.body.replace(/redaxo:\/\/(.*)"/g,'/blog/$1"');
 		}
 		return data; // ! data Object returned directly thus just include the fields e.g. {{title}}

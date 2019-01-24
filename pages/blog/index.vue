@@ -11,6 +11,7 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 <template>
 	<main class="blog-page page">
 		<h1>Blog</h1>
+		<!-- <blog-list/> -->
 		<nav>
 			<ul>
 				<li v-for="r in sub_articles" v-bind:key="r.id">
@@ -22,6 +23,7 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 </template>
 
 <script>
+import BlogList from '~/components/BlogList.vue'
 import axios from 'axios';
 
 export default {
@@ -29,6 +31,9 @@ export default {
 		const { data } = await axios.get('https://www.kuehne-webdienste.de/api/articles/25/1') // without body content
 		return data;
 	},
+	// components [
+	// 	BlogList
+	// ],
 	head () {
 		return {
 			title : 'Blog'

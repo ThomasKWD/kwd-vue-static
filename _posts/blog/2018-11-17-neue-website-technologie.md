@@ -5,10 +5,8 @@ date: {}
 thumbnail: /images/339511_298233096856680_426527164_o.jpg
 rating: '1'
 ---
-Das ist der erste Text. Keine Ahnung wie man einen internen Link oder eine Seiten**struktur** erzeugt.
+In der vorliegenden Website werden Inhalte eines anderen Projektes über eine JSON-API bereitgestellt.
 
-Dieser Satz wurde mit Prose ergänzt.
+## Features
 
-> Der Teufel steckt meist im Detail
-
-## Satz drei.
+* Die Daten der API werden dafür verwendet menschenlesbare "Deep-Links" zu erzeugen und zu verwenden. Diese werden aus den Titeln und Ids der erhaltenen Artikeldaten erzeugt.
