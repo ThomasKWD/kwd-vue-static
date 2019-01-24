@@ -13,19 +13,17 @@ Displays preview list of blogs, which can be used on different pages
 		    <nuxt-link v-bind:to="'/blog/'+b.id">{{ b.title }}</nuxt-link>
 		  </li>
 	</ul>
-
-	<!-- <pre>{{blogs}}</pre> -->
 </nav>
 </template>
 
 <script>
+var cmsPosts = require('extended-netlify-cms-loader?collection=blog!../static/admin/config.yml')
 import projectConstants from '~/modules/projectConstants'
 
-console.log(`found ID base ${projectConstants.netlifyBlogStartId}`)
+// console.log(`found ID base ${projectConstants.netlifyBlogStartId}`)
 
 // TODO: should provide separate module to have logic in one place
 //       something like "blogReader", that can be used by BlogArticle or BlogList or other views
-var cmsPosts = require('extended-netlify-cms-loader?collection=blog!../static/admin/config.yml')
 // var markDownIt = require('markdown-it')
 // var md = new markDownIt();
 var i;

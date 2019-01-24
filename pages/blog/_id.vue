@@ -12,8 +12,10 @@
 import constants from '~/modules/projectConstants'
 import axios from 'axios';
 
-// var markDownIt = require('markdown-it')
-// var md = new markDownIt();
+var cmsPosts = require('extended-netlify-cms-loader?collection=blog!../../static/admin/config.yml')
+
+var markDownIt = require('markdown-it')
+var md = new markDownIt();
 
 export default {
 	// async asyncData({params}) {
@@ -33,17 +35,30 @@ export default {
 		var result;
 		// ! only working, if var is named 'data'
 		var data = {};
-
 		// ! payload is only for 'nuxt generate' you will need to access axios directly when "nuxt"
 		if (context.payload) {
 			// data = context.payload.sub_article;
 			data = context.payload;
+			console.log('context.payload found')
 			console.log(`payload for blog ${data.id} found`)
-			// console.log(context.payload)
 		}
 		else {
 			if (context.params.id > constants.netlifyBlogStartId) {
-				console.log(`found constants.netlifyBlogStartId: ${context.data.id}`)
+				// console.log(`found constants.netlifyBlogStartId: ${context.params.id}`)
+				// var data = BlogList.data().blogs[context.params.id - constants.netlifyBlogStartId -1 ]; // -1 because its an index
+				// data = cmsPosts[context.params.id - constants.netlifyBlogStartId -1];
+				// // TODO: resolve missing body problem (worked before)
+				// console.log(`postData.body: ${data.body}`)
+				// if (typeof data.body !== 'undefined') data.body = md.render(data.body); // ! ovewrites itself with "Markdown" rendered content
+				// else data.body = '<p>ww</p>';
+				// // 	return {
+				// 		title : postData.title,
+				// 		markdownBlogHtml : md.render(postData.body),
+				// 		// head : function () {
+				// 		// 	return {
+				// 		// 		title : postData.title // gets title property from returned data
+				// 		// 	}
+				// 		// }
 			}
 			else {
 				result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
@@ -69,6 +84,9 @@ export default {
 		}
 		return data; // ! data Object returned directly thus just include the fields e.g. {{title}}
 	},
+	// components : {
+	// 	BlogList
+	// },
 	head () {
 		return {
 			title : this.title

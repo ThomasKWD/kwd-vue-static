@@ -1,2 +1,2 @@
 # Redirect default Netlify subdomain to primary domain
-http://loving-kowalevski-d056fa.netlify.com/* http://www.kuehne-webseiten.de/:splat 301!
+http://kuehne-webseiten.netlify.com/* http://www.kuehne-webseiten.de/:splat 301!

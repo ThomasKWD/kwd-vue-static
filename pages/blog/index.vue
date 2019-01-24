@@ -1,4 +1,4 @@
-Interesting that a text here is ignored and thus can be used as *comment*.
+<!--Interesting that a text here is ignored and thus can be used as *comment*.
 
 actually you would need a base page template (see layouts) which contains structures which
 
@@ -8,10 +8,11 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 
 ??? the component "blog list" doesn't help much if you like to generate static blog article pages
 	you have to integrate the list of found blog entries in the custom routes definition (nuxt.config.js)
+-->
 <template>
 	<main class="blog-page page">
 		<h1>Blog</h1>
-		<!-- <blog-list/> -->
+		<blog-list/>
 		<nav>
 			<ul>
 				<li v-for="r in sub_articles" v-bind:key="r.id">
@@ -31,9 +32,9 @@ export default {
 		const { data } = await axios.get('https://www.kuehne-webdienste.de/api/articles/25/1') // without body content
 		return data;
 	},
-	// components [
-	// 	BlogList
-	// ],
+	components : {
+		BlogList
+	},
 	head () {
 		return {
 			title : 'Blog'
