@@ -11,16 +11,23 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 <template>
 	<main class="blog-page page">
 		<h1>Blog</h1>
-		<blog-list/>
+		<nav>
+			<ul>
+				<li v-for="r in sub_articles" v-bind:key="r.id">
+					<nuxt-link v-bind:to="'/blog/'+r.id">{{ r.title }}</nuxt-link>
+				  </li>
+			</ul>
+		</nav>
 	</main>
 </template>
 
 <script>
-import BlogList from '~/components/BlogList.vue' //you can use any name
+import axios from 'axios';
+
 export default {
-	components:
-	{
-		BlogList
+	async asyncData({params}) {
+		const { data } = await axios.get('https://www.kuehne-webdienste.de/api/articles/25/1') // without body content
+		return data;
 	},
 	head () {
 		return {
