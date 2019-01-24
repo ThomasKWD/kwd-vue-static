@@ -1,5 +1,6 @@
 import axios from 'axios'
 import constants from './modules/projectConstants'
+import {generateNamedPath} from './modules/routesFromApi'
 
 module.exports = {
 	/*
@@ -51,8 +52,11 @@ module.exports = {
 				// console.log(articles)
 				// ??? why function map unknown
 				return data.sub_articles.map((sub_article) => {
+					// ??? can't use generateNamedPath until also used in dynamic routing and in links
+					// ??? maybe easier to generate path names in API (PHP)
+					sub_article.namedPath = generateNamedPath(sub_article.id) // ! code not used...
 					return {
-						route : '/'+constants.referencesPathName+'/' + sub_article.id,
+						route : '/'+constants.referencesPathName+'/' + subarticle.id, //sub_article.namedPath
 						payload : sub_article
 					}
 				})
