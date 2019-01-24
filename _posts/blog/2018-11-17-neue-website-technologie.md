@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: Neue Website Technologie
-date: {}
+date: 2018-11-17T15:48:14.050Z
 thumbnail: /images/339511_298233096856680_426527164_o.jpg
 rating: '1'
 ---
