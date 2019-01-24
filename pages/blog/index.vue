@@ -9,7 +9,7 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 ??? the component "blog list" doesn't help much if you like to generate static blog article pages
 	you have to integrate the list of found blog entries in the custom routes definition (nuxt.config.js)
 <template>
-	<main class="blog-page">
+	<main class="blog-page page">
 		<h1>Blog</h1>
 		<blog-list/>
 	</main>

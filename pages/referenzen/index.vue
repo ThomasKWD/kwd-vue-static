@@ -7,7 +7,7 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 
 -->
 <template>
-	<main class="references-page">
+	<main class="references-page page">
 		<h1>{{title}}</h1>
 		<nav>
 			<ul>

@@ -1,12 +1,14 @@
 <template>
-  <div>
-	  <page-header/>
-    <nuxt/>
-  </div>
+	<div>
+		<page-header/>
+		<nuxt/>
+		<page-footer/>
+	</div>
 </template>
 
 <script>
 import PageHeader from '~/components/DefaultHeader.vue' //you can use any name
+import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
 
 export default {
 	// asyncData : function() {
@@ -18,7 +20,8 @@ export default {
 	// },
 	components:
 		{
-			PageHeader
+			PageHeader,
+			PageFooter
 		}
 }
 </script>
@@ -69,7 +72,8 @@ html {
   background-color: #35495e;
 }
 
-.main-page-region {
+.main-page-region,
+.page {
 	margin:30px;
 	padding: 30px;
 }

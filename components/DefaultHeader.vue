@@ -14,6 +14,6 @@
 
 <style>
 .MainPageHeader {
-	background-color: #EEE;
+	background-color: #b4dafd;
 }
 </style>

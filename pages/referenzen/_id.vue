@@ -2,10 +2,12 @@
 - TODO: get already fetched data (if so) via payload
 -->
 <template>
-	<article class="reference-post">
-		<h1>{{title}}</h1>
-		<div class="post-body" v-html="body"></div>
-	</article>
+	<main class="page">
+		<article class="reference-post">
+			<h1>{{title}}</h1>
+			<div class="post-body" v-html="body"></div>
+		</article>
+	</main>
 </template>
 
 <script>

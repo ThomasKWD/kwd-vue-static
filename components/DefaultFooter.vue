@@ -7,6 +7,10 @@
 
 <style>
 .MainPageFooter {
-	background-color: #AAA;
+	background-color: #093f58;
+	color: #b4dafd;
+}
+.MainPageFooter a {
+	color:white;
 }
 </style>

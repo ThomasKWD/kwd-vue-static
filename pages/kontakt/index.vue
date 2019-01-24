@@ -1,7 +1,7 @@
 ??? already get data in custom route, parse "redaxo://" links there and generate sub pages, eg. for license and privacy policy
 
 <template>
-	<main class="contact-page">
+	<main class="contact-page page">
 		<h1>{{title}}</h1>
 		<div class="contact-body" v-html="body"></div>
 	</main>

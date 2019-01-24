@@ -3,12 +3,11 @@
   <section class="container">
     <div>
 
-      <app-logo/>
       <h1 class="title">
         {{projectTitle}}
       </h1>
       <h2 class="subtitle">
-        Willkommen auf der neuen Website im Material Design!
+        Willkommen auf der neuen Website mit VueJS!
       </h2>
 	  <p> powered by:</p>
       <div class="links">
@@ -22,7 +21,6 @@
           class="button--grey">GitHub</a>
       </div>
 
-		<page-footer/>
     </div>
   </section>
 </template>
