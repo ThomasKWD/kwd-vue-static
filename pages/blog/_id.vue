@@ -57,6 +57,9 @@ export default {
 			// - read article from redaxo link as json from kwd, check parent and decide (e.g. parent id == 3 then reference)
 
 			// ??? actually you must parse the structure of the project to tell if link should be under blog, reference or other
+
+			// shuri ryu test fake
+			data.body = data.body.replace(/redaxo:\/\/12"/g,'/referenzen/12"');
 			data.body = data.body.replace(/redaxo:\/\/(.*)"/g,'/blog/$1"');
 		}
 		return data; // ! data Object returned directly thus just include the fields e.g. {{title}}
@@ -68,3 +71,11 @@ export default {
 	}
 }
 </script>
+
+<style>
+/* although better if code itself would be removed */
+/* the cool thing is that these comments are not in the resulting css */
+.blueimp-gallery {
+	display:none;
+}
+</style>
