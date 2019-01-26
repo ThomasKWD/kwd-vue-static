@@ -1,7 +1,7 @@
 {
   "name": "kwd-vue-static",
   "version": "1.0.0",
-  "description": "kwd static website powered by vuewebsite powered by ",
+  "description": "kwd static website powered by Nuxt (VueJS)",
   "author": "Thomas Kühne <thomas@kuehne-webdienste.de>",
   "private": true,
   "scripts": {
@@ -11,23 +11,46 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-	"test": "ava --serial"
+    "test": "ava --serial --verbose"
   },
   "dependencies": {
+    "acorn": "^6.0.5",
     "axios": "^0.18.0",
     "extended-netlify-cms-loader": "^0.4.2",
     "markdown-it": "^8.4.2",
     "markdown-loader": "^4.0.0",
     "netlify-cms-loader": "^0.4.1",
-    "nuxt": "^2.3.2"
+    "nuxt": "^2.3.4"
   },
   "devDependencies": {
+    "@babel/register": "^7.0.0",
     "ava": "^1.1.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^4.0.0",
-    "jsdom": "^13.1.0"
+    "jsdom": "^13.2.0"
+  },
+  "ava": {
+    "files": [
+      "test/*.test.js"
+    ],
+    "requires": [
+      "babel-core/register"
+    ],
+    "babel": {
+      "testOptions": {
+        "babelrc":false,
+        "presets": [
+          [
+            "module:ava/stage-4",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      }
+    }
   }
 }

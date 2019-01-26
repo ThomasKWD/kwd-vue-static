@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import {resolve} from 'path'
 import { Nuxt, Builder } from 'nuxt'
 import { JSDOM } from 'jsdom'
 import test from 'ava'
