@@ -4,7 +4,7 @@
 <template>
 	<main class="page">
 		<article class="reference-post">
-			<h1>{{title}}</h1>
+			<h1>{{name}}</h1>
 			<div class="post-body" v-html="body"></div>
 		</article>
 	</main>
@@ -41,8 +41,17 @@ export default {
 			// console.log(context.payload)
 		}
 		else {
-			result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
-			data = result.data;
+			try {
+
+				result = await axios.get(`https://www.kuehne-webdienste.de/api/categories/${context.params.id}/0/articles/contents`)
+				data = result.data;
+				data.body = data.articles[0].body // ! articles[0] could be undefined
+			}
+			catch (e) {
+				data.categories = []
+				data.name = 'Referenz'
+				data.body = '<p>[Daten für diese Seite konnten nicht geladen werden.]</p>'
+			}
 		}
 
 		// const {data} = null;
@@ -67,11 +76,12 @@ export default {
 			// ??? actually you must parse the structure of the project to tell if link should be under blog, reference or other
 			data.body = data.body.replace(/redaxo:\/\/(.*)"/g,'/blog/$1"');
 		}
+
 		return data; // ! data Object returned directly thus just include the fields e.g. {{title}}
 	},
 	head () {
 		return {
-			title : this.title // must also be renamed when data has 'name'
+			title : this.name // must also be renamed when data has 'name'
 		}
 	}
 }

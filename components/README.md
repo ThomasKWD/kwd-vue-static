@@ -3,5 +3,9 @@
 The components directory contains your Vue.js Components.
 Nuxt.js doesn't supercharge these components.
 
-**This directory is not required, you can delete it if you don't want to use it.**
+plan:
 
+* base component for list + for single entry
+* derived cdomponent for list + entry because 2 types:
+  	* start articles from categories
+	* articles from 1 category

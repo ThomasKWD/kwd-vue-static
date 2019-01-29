@@ -39,28 +39,56 @@ module.exports = {
 	**
 	*/
 	generate : {
-		routes: function () {
+		routes:  async function() {
 			// article 3 contains list of sub categories of "References"
 			// ??? centralized const def. in project (also for pages generation)
 			// ??? you could build up the entire redaxo hierchy as routes
 			// ??? try to use the titles for paths, not just ids, for this make own converter from title
 			//     better: have a metainfo field in Redaxo which - if set - contains title for URL, otherwise build from normal title of article
-			return axios.get('https://www.kuehne-webdienste.de/api/articles/3/content')
-			.then(({data}) => {
-				// var articles = res.data.sub_articles;
-				// console.log('--'+typeof articles )
-				// console.log(articles)
-				// ??? why function map unknown
-				return data.sub_articles.map((sub_article) => {
-					// ??? can't use generateNamedPath until also used in dynamic routing and in links
-					// ??? maybe easier to generate path names in API (PHP)
-					sub_article.namedPath = generateNamedPath(sub_article.id) // ! code not used...
-					return {
-						route : '/'+constants.referencesPathName+'/' + subarticle.id, //sub_article.namedPath
-						payload : sub_article
-					}
-				})
+
+			// ??? why does promise not work anymore
+			// let referencesRoutes = axios.get('https://www.kuehne-webdienste.de/api/categories/3/articles/contents')
+			// .then(({data}) => {
+			// 	console.log('XXXXXXXXXXXXXXXX')
+			// 	return data.categories.map((cat) => {
+			// 		console.log(`cat ${cat.id}`)
+			// 		// cat.namedPath = generateNamedPath(cat.id) // ! defined field not used...
+			// 		return {
+			// 			route : '/'+constants.referencesPathName+'/' + cat.id, //sub_article.namedPath
+			// 			payload : {}
+			// 		}
+			// 	})
+			// })
+			// .catch((problem) => {
+			// 	console.log(problem)
+			// })
+
+			let {data} = await axios.get('https://www.kuehne-webdienste.de/api/categories/3/articles/contents')
+
+			let referencesRoutes = data.categories.map((cat) => {
+				// cat.namedPath = generateNamedPath(cat.id) // ! defined field not used...
+				return {
+					route : '/'+constants.referencesPathName+'/' + cat.id, //sub_article.namedPath
+					payload : cat
+				}
 			})
+
+			referencesRoutes.push({
+				route : '/newcat',
+				payload : {
+					id : 1234,
+					name : "My new Base Cat",
+					articles : [
+						{
+							id : 1234,
+							name : 'Base Cat Article Name',
+							body : '<p>Content of my dyn article<p>'
+						}
+					]
+				}
+			})
+
+			return referencesRoutes
 		}
 	},
 

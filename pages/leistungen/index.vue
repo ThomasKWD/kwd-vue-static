@@ -15,8 +15,8 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 		<h1>Leistungen</h1>
 		<nav>
 			<ul>
-				<li v-for="r in sub_articles" v-bind:key="r.id">
-					<nuxt-link v-bind:to="'/leistungen/'+r.id">{{ r.title }}</nuxt-link>
+				<li v-for="r in categories" v-bind:key="r.id">
+					<nuxt-link v-bind:to="'/leistungen/'+r.id">{{ r.name }}</nuxt-link>
 				  </li>
 			</ul>
 		</nav>
@@ -28,7 +28,20 @@ import axios from 'axios';
 
 export default {
 	async asyncData({params}) {
-		const { data } = await axios.get('https://www.kuehne-webdienste.de/api/articles/4/1') // without body content
+		let data = {}
+
+		try {
+
+			data  = await axios.get('https://www.kuehne-webdienste.de/api/articles/4/1').data // without body content
+			if (!Array.isArray(data.categories)) data.categories = []
+
+		}
+		catch (e) {
+			console.log(e)
+			data.name = 'Keine Daten'
+			data.categories = []
+		}
+
 		return data;
 	},
 	head () {

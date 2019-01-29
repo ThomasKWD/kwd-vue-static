@@ -1,4 +1,3 @@
-<!-- test comment paul -->
 <template>
   <section class="container">
     <div>
@@ -9,6 +8,7 @@
       <h2 class="subtitle">
         Willkommen auf der neuen Website mit VueJS!
       </h2>
+	  <p>cross link: <nuxt-link to="/newcat">Dyn Cat</nuxt-link>  - jetzt noch link dynamisch setzen aus Daten</p>
 	  <p> powered by:</p>
       <div class="links">
         <a
