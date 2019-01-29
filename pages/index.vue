@@ -6,19 +6,33 @@
         {{projectTitle}}
       </h1>
       <h2 class="subtitle">
-        Willkommen auf der neuen Website mit VueJS!
+        Willkommen auf meiner neuen Website!
       </h2>
+
+	  <section class="card-container">
+		  <list-articles list-type="sub-categories" apirequest="referenzen/3" v-bind:subtitle="indexSubHeading"></list-articles>
+		  <list-articles list-type="category-articles" apirequest="blog/21" v-bind:subtitle="otherIndexSubHeading"></list-articles>
+	  </section>
+
 	  <p>cross link: <nuxt-link to="/newcat">Dyn Cat</nuxt-link>  - jetzt noch link dynamisch setzen aus Daten</p>
 	  <p> powered by:</p>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Nuxt</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
+		  <a
+            href="https://nuxtjs.org/"
+			target="_blank"
+			class="button--green">Nuxt</a>
+			<a
+			href="https://vuejs.org/"
+			target="_blank"
+			class="button--green">Vue</a>
+			<a
+          href="https://github.com/ThomasKWD/kwd-vue-static"
           target="_blank"
           class="button--grey">GitHub</a>
+		  <a
+		href="https://redaxo.org"
+		target="_blank"
+		class="button--grey">Redaxo</a>
       </div>
 
     </div>
@@ -26,25 +40,26 @@
 </template>
 
 <script>
+import constants from '~/modules/projectConstants'
 import AppLogo from '~/components/AppLogo.vue'
 import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
-// const cmsPosts = require('extended-netlify-cms-loader?collection=blog!../static/admin/config.yml')
-// var markDownIt = require('markdown-it')
-// var md = new markDownIt();
-
-var projectTitle = 'KÜHNE-Webseiten.de';
+import ListArticles from '~/components/ListArticles.vue'
 
 export default {
-	asyncData : function() {
+	asyncData : function(context) {
+		console.log('here comes context of index page')
+		console.log(context)
 		return  {
-			projectTitle : projectTitle
+			projectTitle : constants.projectTitle,
+			indexSubHeading : 'Influenced by index page',
+			otherIndexSubHeading : 'This must become a list of arts'
 			// markdownBlog : cmsPosts[0].body
 			// markdownBlogHtml : md.render(cmsPosts[0].body)
 			// us like: <div class="blog-post" v-html="markdownBlogHtml"></div>
 		}
 	},
 	components : {
-		AppLogo,PageFooter
+		AppLogo,PageFooter,ListArticles
 	}
 }
 </script>
