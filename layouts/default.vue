@@ -26,7 +26,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -77,4 +77,15 @@ html {
 	margin:30px;
 	padding: 30px;
 }
+
+a {
+	color: #0d63b4; // also cool as dark bg for logo
+	text-decoration: none;
+
+	&:hover {
+		color:black;
+		text-decoration: underline;
+	}
+}
+
 </style>

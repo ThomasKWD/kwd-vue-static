@@ -21,7 +21,7 @@ export default {
 </script>
 
 <!--<style lang="scss">-->
-<style>
+<style lang="scss">
 .card {
 	/* margin: $defaultSpacing;
 	padding: $defaultSpacing; */
@@ -29,29 +29,40 @@ export default {
 	padding: 30px;
 	border: 1px solid #b4dafd;
 	border-radius: 7px;
+	border-top-right-radius: 40px;
 	box-shadow: 0 3px 7px rgba(0,0,0,0.25);
 	/* min-height:5em;
 	min-width:5em; */
+	max-width: 500px;
 	text-align: left;
 
-}
-.card h1,
-.card h2,
-.card h3,
-.card h4 {
-	text-align: center;
-	font-weight:normal;
-	font-family:
-}
-.card h4 {
-	font-size:200%;
-}
-.title {
-	font-size: 100%;
-}
-.sub-title {
-	font-size:50%;
-	font-style: italic;
-	display:block;
+	float:left;
+
+	ul {
+		list-style-type: none;
+		padding-left:0;
+	}
+
+
+	h1,h2,h3,h4,p,ul,ol {
+		margin-bottom: 30px;
+	}
+
+	h1,h2,h3,h4 {
+		font-size:200%;
+		text-align: center;
+		font-weight:normal;
+	}
+	h4 {
+		font-size:200%;
+	}
+	.title {
+		font-size: 100%;
+	}
+	.sub-title {
+		font-size:50%;
+		font-style: italic;
+		display:block;
+	}
 }
 </style>
