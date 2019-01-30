@@ -5,12 +5,21 @@
 	</div>
 </template>
 
-<style>
+<style lang="scss">
+@import '../assets/_shapes';
+
 .MainPageFooter {
+	@include blockShape;
+
 	background-color: #093f58;
 	color: #b4dafd;
+	border:1px solid white;
 }
 .MainPageFooter a {
+	color:white;
+}
+.MainPageFooter a,
+.MainPageFooter a:hover {
 	color:white;
 }
 </style>

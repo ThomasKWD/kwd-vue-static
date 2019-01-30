@@ -4,55 +4,55 @@
   <section class="container">
     <div>
 
-      <h1 class="title">
-        {{projectTitle}}
-      </h1>
-      <h2 class="subtitle">
+      <h1 class="subtitle">
         Willkommen auf meiner neuen Website!
-      </h2>
+	</h1>
 
-	  <section class="card-container">
+	  <div class="container-grid-3">
 
 		  <list-articles
-		  v-bind:title="referencesTitle"
-		  list-type="sub-categories"
-		  cat-type="referenzen"
-		  v-bind:article-data="referencesList"
+			  v-bind:title="newsTitle"
+			  list-type="sub-articles"
+			  cat-type="blog"
+			  v-bind:article-data="newsList"
 		  ></list-articles>
 
 		  <list-articles
-		  v-bind:title="referencesTitle"
-		  list-type="sub-articles"
-		  cat-type="blog"
-		  v-bind:article-data="newsList"
+			  v-bind:title="offersTitle"
+			  list-type="sub-categories"
+			  cat-type="leistungen"
+			  v-bind:article-data="offersList"
 		  ></list-articles>
 
-		  <ul>1
-			  <li>ereter punkt</li>
-		  </ul>
-	  </section>
+		  <list-articles
+			  v-bind:title="referencesTitle"
+			  list-type="sub-categories"
+			  cat-type="referenzen"
+			  v-bind:article-data="referencesList"
+		  ></list-articles>
 
-	  <p>cross link: <nuxt-link to="/newcat">Dyn Cat</nuxt-link>  - jetzt noch link dynamisch setzen aus Daten</p>
+	</div>
+		<div class="container-grid-3">
+		  <preview-article
+			  cat-type="referenzen"
+			  v-bind:preview-content="previews[0]"
+		  ></preview-article>
+
+		  <preview-article
+			  cat-type="referenzen"
+			  v-bind:preview-content="previews[1]"
+		  ></preview-article>
+
+		  <preview-article
+			  cat-type="referenzen"
+			  v-bind:preview-content="previews[3]"
+		  ></preview-article>
+	  </div>
+
+	  <p style="display:none">cross link: <nuxt-link to="/newcat">Dyn Cat</nuxt-link>  - jetzt noch link dynamisch setzen aus Daten</p>
+
 	  <p> powered by:</p>
-      <div class="links">
-		  <a
-            href="https://nuxtjs.org/"
-			target="_blank"
-			class="button--green">Nuxt</a>
-			<a
-			href="https://vuejs.org/"
-			target="_blank"
-			class="button--green">Vue</a>
-			<a
-          href="https://github.com/ThomasKWD/kwd-vue-static"
-          target="_blank"
-          class="button--grey">GitHub</a>
-		  <a
-		href="https://redaxo.org"
-		target="_blank"
-		class="button--grey">Redaxo</a>
-      </div>
-
+	  ...
     </div>
   </section>
 </template>
@@ -62,6 +62,7 @@ import constants from '~/modules/projectConstants'
 import AppLogo from '~/components/AppLogo.vue'
 import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
 import ListArticles from '~/components/ListArticles.vue'
+import PreviewArticle from '~/components/PreviewArticle.vue'
 import axios from 'axios';
 
 export default {
@@ -69,7 +70,11 @@ export default {
 		// shorten axios get call by pre defining axios.create like in:
 		// https://github.com/davidroyer/nuxt-api-example/
 		// ??? how to automate fetch of data (sub module function)
-		let url = constants.basePathCategories + 3 + constants.pathExtensionArticles
+
+		let url = '';
+
+		// list of "Referenzen"
+		url = constants.basePathCategories + 3 + constants.pathExtensionArticles
 		let data = null;
 		try {
 			let res  = await axios.get(url)
@@ -78,17 +83,35 @@ export default {
 		catch(e) {
 			console.log(e)
 			data = {
-				// ??? how to provide such a grey bar instead of text
+				// ??? how to provide such a graphical grey bar instead of text
 				name : 'Kategorie',
 				categories : []
 			}
 		}
 
+		// list of "Leistungen"
+		url = constants.basePathCategories + 4 + constants.pathExtensionArticles
+		let dataOffers = null;
+		try {
+			let res  = await axios.get(url)
+			dataOffers = res.data
+		}
+		catch(e) {
+			console.log(e)
+			dataOffers = {
+				// ??? how to provide such a graphical grey bar instead of text
+				name : 'Kategorie',
+				categories : []
+			}
+		}
+
+		// list of "News"
 		url = constants.basePathCategories + 21 + constants.pathExtensionArticles
 		let dataNews = null;
 		try {
 			let res  = await axios.get(url)
 			dataNews = res.data
+			// now remove first article (start article) if present
 		}
 		catch(e) {
 			console.log(e)
@@ -99,12 +122,49 @@ export default {
 			}
 		}
 
+		// Preview of reference 1
+		// ??? re-use api call of references with body
+		url = constants.basePathCategories + 3 + constants.pathExtensionArticlesWithBody
+		let refPreviews = null;
+		let testarticle
+		try {
+			let res  = await axios.get(url)
+			refPreviews = res.data
+			testarticle = refPreviews.categories[0].articles[0].name // trying to cause error
+		}
+		catch(e) {
+			console.log(e)
+			refPreviews = {
+				categories : [
+					{
+						name : 'no data for preview',
+						articles : [
+							{
+								name : 'no data',
+								body : 'no content'
+							}
+						]
+					}
+				]
+			}
+		}
+
+		// console.log('IN INDEX')
+		// console.log(url)
+		// console.log(refPreviews)
+
 		// ??? to shorten the return list you could put all fetched data into object/array hence only in attribute(prop) selection e.g. listData.references.entries, listData.news.title
 		// ??? the fetch goes to sub module
+		// all the vars could also be generated (passed object)
 		return  {
 			referencesList : data.categories,
 			referencesTitle : data.name,
+			offersList : dataOffers.categories,
+			offersTitle : dataOffers.name,
 			newsList : dataNews.articles,
+			newsTitle : dataNews.name,
+			previews : refPreviews.categories,
+
 			projectTitle : constants.projectTitle,
 			otherIndexSubHeading : 'This must become a list of arts'
 			// markdownBlog : cmsPosts[0].body
@@ -113,12 +173,14 @@ export default {
 		}
 	},
 	components : {
-		AppLogo,PageFooter,ListArticles
+		AppLogo,PageFooter,ListArticles,PreviewArticle
 	}
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '../assets/_container';
+
 .container {
   min-height: 100vh;
   display: flex;

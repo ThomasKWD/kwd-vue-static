@@ -1,7 +1,10 @@
 <template>
 	<div class="MainPageHeader main-page-region">
 		<div class="brand">
-			<a href="/" title="gehe zur Startseite"><img src="/kwd-4-title.png" alt="Logo Kühne-Webdienste.de"></a>
+			<a href="/" title="gehe zur Startseite">
+				<span class="brand-name">{{title}}</span> by
+				<img src="/kwd-4-title.png" alt="Logo Kühne-Webdienste.de">
+			</a>
 		</div>
 		<div>
 			<nuxt-link to="/">Home</nuxt-link> |
@@ -13,8 +16,54 @@
 	</div>
 </template>
 
-<style>
+<script>
+import constants from '~/modules/projectConstants'
+
+export default {
+	data() {
+		return {
+			title : constants.projectTitle
+		}
+	}
+}
+</script>
+
+<style lang="scss">
+@import '../assets/_shapes';
+@import '../assets/_colors';
+
 .MainPageHeader {
-	background-color: #b4dafd;
+	@include blockShape;
+
+	background-color: $colorKwdBlue;
+	background-image: linear-gradient(to bottom left, darken($colorKwdBlue,7%),lighten($colorKwdBlue,7%));
+	border:1px solid white;
+
+	.brand {
+		margin-bottom: 20px;
+		overflow: hidden;
+
+		a {
+			color: #0d63b4;
+			&:hover,
+			&:focus {
+				color: #0d63b4;
+				text-decoration: none;
+			}
+		}
+
+		.brand-name {
+		display: inline-block;
+			font-size: 40px;
+			padding-right: 20px;
+			// padding-left: 20px;
+		}
+
+		img {
+			margin-left:8px;
+			vertical-align: bottom;
+		}
+
+	}
 }
 </style>

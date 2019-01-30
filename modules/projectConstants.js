@@ -1,8 +1,15 @@
+
+function baseUrl() {
+	return 'https://www.kuehne-webdienste.de/'
+}
+
 export default  {
-	projectTitle : 'KÜHNE-Webseiten.de',
+	projectTitle : 'KÜHNE-Webseiten',
 	netlifyBlogStartId : 1000,
 	referencesPathName : 'referenzen',
-	basePathCategories : 'https://www.kuehne-webdienste.de/api/categories/',
+	basePath : baseUrl(),
+	basePathCategories : baseUrl() + 'api/categories/',
 	pathExtensionArticles : '/articles',
-	pathExtensionArticlesWithBody : '/articles/contents'
+	pathExtensionArticlesWithBody : '/articles/contents',
+	mediaPath : baseUrl() + 'files/'
 }

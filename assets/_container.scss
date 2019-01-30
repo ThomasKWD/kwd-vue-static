@@ -1,0 +1,11 @@
+// this container does not force 3 child divs per row but adjusts to it
+.container-grid-3 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+// direct children may by div or other!
+.container-grid-3>* {
+	width:300px;
+}
