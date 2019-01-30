@@ -27,6 +27,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/_colors';
+
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -87,5 +89,35 @@ a {
 		text-decoration: underline;
 	}
 }
+
+.btn, .btn--default{
+	display: inline-block;
+	padding: 10px 15px;
+	font-variant: small-caps;
+
+	background-color: $colorKwdDark;
+	color: white;
+	border-radius: 3px;
+	border-top-right-radius: 15px;
+	transition: all 0.2s ease-out;
+	outline:none;
+	border: 1px solid $colorKwdDark;
+	box-shadow: 0 5px 7px rgba(0,0,0,0.25);
+
+	&:hover,
+	&:focus {
+		box-shadow: none;
+		text-decoration: none;
+		border-color:white;
+	}
+	&:active {
+		box-shadow: 0 5px 7px rgba(0,0,0,0.25) inset;
+	}
+}
+.btn--inverse {
+	background-color: $colorKwdBlue;
+	color: $colorKwdBlue;
+}
+
 
 </style>

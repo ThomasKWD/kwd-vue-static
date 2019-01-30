@@ -110,6 +110,7 @@ export default {
 		content: " ";
 		clear:both;
 		float:none;
+		display: table;
 	}
 }
 
