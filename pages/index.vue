@@ -8,7 +8,7 @@
         Willkommen auf meiner neuen Website!
 	</h1>
 
-	  <div class="container-grid-3">
+	  <div class="container-grid-3 list-row">
 
 		  <list-articles
 			  v-bind:title="newsTitle"
@@ -32,7 +32,7 @@
 		  ></list-articles>
 
 	</div>
-		<div class="container-grid-3">
+		<div class="container-grid-3 preview-row">
 		  <preview-article
 			  cat-type="referenzen"
 			  v-bind:preview-content="previews[0]"
@@ -49,10 +49,6 @@
 		  ></preview-article>
 	  </div>
 
-	  <p style="display:none">cross link: <nuxt-link to="/newcat">Dyn Cat</nuxt-link>  - jetzt noch link dynamisch setzen aus Daten</p>
-
-	  <p> powered by:</p>
-	  ...
     </div>
   </section>
 </template>

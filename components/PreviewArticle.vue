@@ -52,3 +52,13 @@ export default {
 	]
 }
 </script>
+<style lang="scss">
+@import '../assets/_shapes';
+
+.preview-row {	
+	.card {
+		@include blockShapeBottom;
+	}
+}
+
+</style>

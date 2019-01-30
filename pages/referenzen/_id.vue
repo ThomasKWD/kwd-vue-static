@@ -2,7 +2,7 @@
 - TODO: get already fetched data (if so) via payload
 -->
 <template>
-	<main class="page">
+	<main class="page reference-page">
 		<article class="reference-post">
 			<h1>{{name}}</h1>
 			<div class="post-body" v-html="body"></div>
@@ -87,10 +87,35 @@ export default {
 }
 </script>
 
-<style>
-	/* although better if code itself would be removed */
-	/* the cool thing is that these comments are not in the resulting css */
-	.blueimp-gallery {
-		display:none;
+<style lang="scss">
+@import '../../assets/_shapes';
+
+.reference-page {
+	@include blockShapeBottom;
+
+	.reference-post {
+		h1 {
+			font-weight: normal;
+			font-size: 200%;
+			margin-bottom: 1em;
+		}
+
+		.referenz-illu {
+			float: left;
+			margin-right:30px;
+			margin-bottom: 30px;
+		}
 	}
+	.reference-post::after {
+		content: " ";
+		clear:both;
+		float:none;
+	}
+}
+
+/* although better if code itself would be removed */
+/* the cool thing is that these comments are not in the resulting css */
+.blueimp-gallery {
+	display:none;
+}
 </style>

@@ -42,6 +42,12 @@ export default {
 		padding-left:0;
 	}
 
+	li {
+		a {
+			display: block;
+			padding: 5px;
+		}
+	}
 
 	h1,h2,h3,h4 {
 		margin-bottom: 15px;
