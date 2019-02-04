@@ -3,6 +3,8 @@ function baseUrl() {
 	return 'https://www.kuehne-webdienste.de/'
 }
 
+// TODO: find usage and change to 'process.env'
+
 export default  {
 	projectTitle : 'KÜHNE-Webseiten',
 	netlifyBlogStartId : 1000,

@@ -1,23 +1,44 @@
 import axios from 'axios'
 // ?? remove constants when env works
-import constants from './projectConstants'
+// import constants from './projectConstants'
+
 // ??? use env??
 // ??? different languages not yet supported
-let myEnv = {}
+// let myEnv = {}
 
-export function kwdApiInit(newEnv) {
-	// that's closure fun
-	// if (typeof newEnv === 'object') myEnv = newEnv;
-	myEnv = newEnv
-}
+// export function kwdApiInit(newEnv) {
+// 	// that's closure fun
+// 	// if (typeof newEnv === 'object') myEnv = newEnv;
+// 	myEnv = newEnv
+// 	console.log('inside kwdApiInit')
+// }
 
 // ??? cannot work for article from news because it is article from an artList
-export async function kwdApiGet(id,type,includes) {
+// - gets env passed when used inside nuxt.config.js for routes; avoiding a closure
+export async function kwdApiGet(id,type,includes,env) {
 
 	// ??? consider try catch
 	// if (typeof process.env.referencesPath === 'undefined') throw new Error('Thomas, this is not e registered module')
 	// ! planned
-	console.log(myEnv.t)
+	// env = env || process.env
+	// ! strange consturction due to 'process.env' NOT being a real object but parsed during render
+	//   hence we can only handle sub fields of process.env
+	let myEnv = env ? env.api : process.env.api
+	// if (env) {
+	// 	myEnv = env;
+	// }
+	// else {
+	// 	myEnv = {
+	// 		t : process.env.t,
+	// 		// ??? we could improve this by putting an object in process.env
+	// 		basePathCategories : process.env.basePathCategories,
+	// 		pathExtensionArticles : process.env.pathExtensionArticles,
+	// 	}
+	// }
+
+
+	// console.log(process.env.t)
+	// if (env) console.log(env.t)
 
 	if (!includes) includes = ''; // in case invalid string passed
 	let requestContent = (includes.indexOf('content') > -1) ? true : false;
@@ -25,11 +46,11 @@ export async function kwdApiGet(id,type,includes) {
 
 	// this.options contains nuxt.config.js
 	//req = 'categories/articles/contents' // test
-	let req = constants.basePathCategories
+	let req = myEnv.basePathCategories
 	req += id || '';
 	// don't need articles if list of cats:
-	if (requestContent || type === 'article') req += constants.pathExtensionArticlesWithBody;
-	else if (type === 'artList') req += constants.pathExtensionArticles;
+	if (requestContent || type === 'article') req += myEnv.pathExtensionArticlesWithBody;
+	else if (type === 'artList') req += myEnv.pathExtensionArticles;
 
 	// console.log(`built uri: ${req}`)
 			//

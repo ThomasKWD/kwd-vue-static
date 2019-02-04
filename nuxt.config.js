@@ -1,22 +1,36 @@
-import constants from './modules/projectConstants'
 import {generateNamedPath} from './modules/routesFromApi'
-import {kwdApiGet,kwdApiInit} from './modules/kwdApi'
+import {kwdApiGet} from './modules/kwdApi'
 
 /** global constants
 * - very simple concept to prevent juggling around with NODE_ENV
-*   but at the same time constants can already be used in helper functions *inside* 'nuxt.config.js'
+*   but at the same time constants inside api can already be used in helper functions *inside* 'nuxt.config.js'
 */
-let env = {
+const kwdApiBase = 'https://www.kuehne-webdienste.de/'
+const env = {
+	projectTitle : 'KÜHNE-Webseiten',
+	netlifyBlogStartId : 1000,
+	basePath : kwdApiBase,
+	mediaPath : kwdApiBase + 'files/',
+
+	pathExtensionBody : '/contents',
+
 	referencesPath : 'referenzen/',
 	offersPath : 'leistungen/',
 	blogsPath : 'blog/',
-	t : 'thomas'
+
+	// all that are needed inside 'kwdApiGet()' before nuxt compiled i.e. here
+	api : {
+		basePathCategories : kwdApiBase + 'api/categories/',
+		pathExtensionArticles : '/articles',
+		pathExtensionArticlesWithBody : '/articles/contents',
+
+	}
 }
 
-kwdApiInit(env)
+// kwdApiInit(env)
 
 async function getRoutesFromkwdApi(path,id,type) {
-	return (await kwdApiGet(id,type,'content')).articles.map((cat) => {
+	return (await kwdApiGet(id,type,'content',env)).articles.map((cat) => {
 		// cat.namedPath = generateNamedPath(cat.id) // ! defined field not used...
 		return {
 			// route : '/'+path+'/' + cat.id, //sub_article.namedPath
@@ -53,7 +67,7 @@ module.exports = {
 	*/
 	head: {
 		title: 'Home',
-		titleTemplate: '%s - '+ constants.projectTitle,
+		titleTemplate: '%s - '+ env.projectTitle,
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
