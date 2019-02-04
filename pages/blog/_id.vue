@@ -2,16 +2,15 @@
 <template>
 	<main class="page">
 		<article class="blog-post">
-			<h1>{{title}}</h1>
+			<h1>{{name}}</h1>
 			<div class="post-body" v-html="body"></div>
 		</article>
 	</main>
 </template>
 
 <script>
+import {kwdApiGet} from '~/modules/kwdApiGet'
 import constants from '~/modules/projectConstants'
-import axios from 'axios';
-
 var cmsPosts = require('extended-netlify-cms-loader?collection=blog!../../static/admin/config.yml')
 
 var markDownIt = require('markdown-it')
@@ -62,8 +61,8 @@ export default {
 				data.body = ''
 			}
 			else {
-				result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
-				data = result.data;
+				// result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
+				data = kwdApiGet(context.params.id,'article');
 			}
 		}
 
@@ -90,7 +89,7 @@ export default {
 	// },
 	head () {
 		return {
-			title : this.title
+			title : this.name
 		}
 	}
 }

@@ -111,6 +111,9 @@ export default {
 		clear:both;
 		float:none;
 		display: table;
+		width:1px;
+		height:1px;
+		opacity: 0.01;
 	}
 }
 

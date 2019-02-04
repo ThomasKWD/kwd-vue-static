@@ -11,24 +11,18 @@
 	  <div class="container-grid-3 list-row">
 
 		  <list-articles
-			  v-bind:title="newsTitle"
-			  list-type="sub-articles"
 			  cat-type="blog"
-			  v-bind:article-data="newsList"
+			  v-bind:article-data="dataList[0]"
 		  ></list-articles>
 
 		  <list-articles
-			  v-bind:title="offersTitle"
-			  list-type="sub-categories"
 			  cat-type="leistungen"
-			  v-bind:article-data="offersList"
+			  v-bind:article-data="dataList[1]"
 		  ></list-articles>
 
 		  <list-articles
-			  v-bind:title="referencesTitle"
-			  list-type="sub-categories"
 			  cat-type="referenzen"
-			  v-bind:article-data="referencesList"
+			  v-bind:article-data="dataList[2]"
 		  ></list-articles>
 
 	</div>
@@ -59,108 +53,30 @@ import AppLogo from '~/components/AppLogo.vue'
 import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
 import ListArticles from '~/components/ListArticles.vue'
 import PreviewArticle from '~/components/PreviewArticle.vue'
-import axios from 'axios';
+import {kwdApiGet} from '~/modules/kwdApiGet'
 
 export default {
 	async asyncData() {
-		// shorten axios get call by pre defining axios.create like in:
-		// https://github.com/davidroyer/nuxt-api-example/
-		// ??? how to automate fetch of data (sub module function)
 
-		let url = '';
+		let lists = [];
 
-		// list of "Referenzen"
-		url = constants.basePathCategories + 3 + constants.pathExtensionArticles
-		let data = null;
-		try {
-			let res  = await axios.get(url)
-			data = res.data
-		}
-		catch(e) {
-			console.log(e)
-			data = {
-				// ??? how to provide such a graphical grey bar instead of text
-				name : 'Kategorie',
-				categories : []
-			}
-		}
+		lists.push(await kwdApiGet(21,'artList'))
+		lists.push(await kwdApiGet(4,'catList'))
+		lists.push(await kwdApiGet(3,'catList'))
 
-		// list of "Leistungen"
-		url = constants.basePathCategories + 4 + constants.pathExtensionArticles
-		let dataOffers = null;
-		try {
-			let res  = await axios.get(url)
-			dataOffers = res.data
-		}
-		catch(e) {
-			console.log(e)
-			dataOffers = {
-				// ??? how to provide such a graphical grey bar instead of text
-				name : 'Kategorie',
-				categories : []
-			}
-		}
+		// remove start article from news list: // ??? should kwd api_json do this?
+		lists[0].articles.shift()
 
-		// list of "News"
-		url = constants.basePathCategories + 21 + constants.pathExtensionArticles
-		let dataNews = null;
-		try {
-			let res  = await axios.get(url)
-			dataNews = res.data
-			// now remove first article (start article) if present
-		}
-		catch(e) {
-			console.log(e)
-			dataNews = {
-				// ??? how to provide such a grey bar instead of text
-				name : 'Kategorie',
-				categories : []
-			}
-		}
-
-		// Preview of reference 1
+		// Preview of 3 references
 		// ??? re-use api call of references with body
-		url = constants.basePathCategories + 3 + constants.pathExtensionArticlesWithBody
-		let refPreviews = null;
-		let testarticle
-		try {
-			let res  = await axios.get(url)
-			refPreviews = res.data
-			testarticle = refPreviews.categories[0].articles[0].name // trying to cause error
-		}
-		catch(e) {
-			console.log(e)
-			refPreviews = {
-				categories : [
-					{
-						name : 'no data for preview',
-						articles : [
-							{
-								name : 'no data',
-								body : 'no content'
-							}
-						]
-					}
-				]
-			}
-		}
-
-		// console.log('IN INDEX')
-		// console.log(url)
-		// console.log(refPreviews)
+		let refPreviews = await kwdApiGet(3,'catList','content')
 
 		// ??? to shorten the return list you could put all fetched data into object/array hence only in attribute(prop) selection e.g. listData.references.entries, listData.news.title
 		// ??? the fetch goes to sub module
 		// all the vars could also be generated (passed object)
 		return  {
-			referencesList : data.categories,
-			referencesTitle : data.name,
-			offersList : dataOffers.categories,
-			offersTitle : dataOffers.name,
-			newsList : dataNews.articles,
-			newsTitle : dataNews.name,
-			previews : refPreviews.categories,
-
+			dataList : lists,
+			previews : refPreviews.articles,
 			projectTitle : constants.projectTitle,
 			otherIndexSubHeading : 'This must become a list of arts'
 			// markdownBlog : cmsPosts[0].body

@@ -30,12 +30,10 @@ export default {
 		return {
 			// you can also use this.<prop>
 			sub_title : '', // currently unused
-			apiList : listType,
-			cardTitle : this.title, // ??? how to dispatch data to slot parent
+			cardTitle : this.articleData.name, // ??? how to dispatch data to slot parent
 			cType : ContentCard.data().componentType,
 			pathBase: '/'+catType+'/',
-			test : 'normal data()',
-			articles : this.articleData
+			articles : this.articleData.articles
 		}
 	},
 	components:  {
@@ -43,10 +41,7 @@ export default {
 	},
 	props : [
 		'catType',
-		'subtitle',
-		'listType',  // you can also write 'list-type'
 		'articleData',
-		'title'
 	]
 }
 

@@ -10,6 +10,7 @@ export default  {
 	basePath : baseUrl(),
 	basePathCategories : baseUrl() + 'api/categories/',
 	pathExtensionArticles : '/articles',
+	pathExtensionBody : '/contents',
 	pathExtensionArticlesWithBody : '/articles/contents',
 	mediaPath : baseUrl() + 'files/'
 }

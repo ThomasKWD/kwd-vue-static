@@ -7,9 +7,27 @@ module.exports = {
 	** Modules
 	*/
 	// modules: [
-	//     // Simple usage
-	//     "~/modules/projectConstants"
-	//   ],
+	// 	// '~/modules/kwdApiGet',
+	// 	'@nuxtjs/axios'
+	// ],
+	// plugins: [
+	// 	'~/plugins/axios'
+	// ],
+	env: {
+		API_URL: constants.baseUrl,
+		API_BROWSER_URL: '/',
+		baseUrl: constants.baseUrl,
+		browserBaseUrl: constants.baseUrl
+	},
+	/*
+	** api presets go into $axios
+	*/
+	// axios: {
+	// 	// proxyHeaders: false
+	// 	baseUrl : 'https://www.kuehne-webdienste.de/api/categories/',
+	// 	browserBaseUrl : 'https://www.kuehne-webdienste.de/api/categories/'
+	// 	//Environment variable API_URL can be used to override baseURL.
+	// },
 
 	/*
 	** Headers of the page
@@ -104,6 +122,7 @@ module.exports = {
 		//       // ...etc.
 		//     })
 		// ],
+
 		/*
 		** Run ESLint on save
 		*/

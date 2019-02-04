@@ -14,12 +14,11 @@ import ContentCard from '~/components/ContentCard.vue'
 export default {
 	data({previewContent}) {
 
-		let pBody = previewContent.articles[0].body
+		let pBody = previewContent.body
 		let firstParagraph = RegExp(/<p*?>[^]*?<\/p>/)
 		let firstImageUrl = RegExp(/<img.*?src="(.*?)"/) // only for media_manager types
 
 		let imageLinkCheck = firstImageUrl.exec(pBody);
-		console.log(imageLinkCheck)
 		let imageLink
 		if (imageLinkCheck !== null && imageLinkCheck[1]) {
 			imageLink = constants.basePath + imageLinkCheck[1].replace('&amp;','&')
@@ -33,12 +32,12 @@ export default {
 			// ! must follow internal structure of JSON from API
 			// - contains list of articles and we choose the first
 			// ! only valid if type == 'start article of sub category'
-			cardTitle : previewContent.articles[0].name,
+			cardTitle : previewContent.name,
 			// body : firstParagraph.exec(pBody)[0], // exec returns *first* occurance
 			// cardTitle : 'previewContent.articles[0].name',
-			// body : 'previewContent.articles[0].body',
+			body : previewContent.body,
 			sub_title : '',
-			continueLink : `/${constants.referencesPathName}/${previewContent.articles[0].id}`,
+			continueLink : `/${constants.referencesPathName}/${previewContent.d}`,
 			// ??? actually want to download images
 			imageLink : imageLink
 		}
@@ -55,7 +54,7 @@ export default {
 <style lang="scss">
 @import '../assets/_shapes';
 
-.preview-row {	
+.preview-row {
 	.card {
 		@include blockShapeBottom;
 	}
