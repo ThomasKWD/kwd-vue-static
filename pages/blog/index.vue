@@ -24,7 +24,7 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 </template>
 
 <script>
-import {kwdApiGet} from '~/modules/kwdApiGet';
+import {kwdApiGet} from '~/modules/kwdApi';
 
 export default {
 	async asyncData({params}) {

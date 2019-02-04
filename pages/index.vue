@@ -43,6 +43,10 @@
 		  ></preview-article>
 	  </div>
 
+	  <ul>
+	  <li>
+		  test: {{t}}
+	  </li></ul>
     </div>
   </section>
 </template>
@@ -53,7 +57,7 @@ import AppLogo from '~/components/AppLogo.vue'
 import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
 import ListArticles from '~/components/ListArticles.vue'
 import PreviewArticle from '~/components/PreviewArticle.vue'
-import {kwdApiGet} from '~/modules/kwdApiGet'
+import {kwdApiGet} from '~/modules/kwdApi'
 
 export default {
 	async asyncData() {
@@ -77,6 +81,7 @@ export default {
 		// ??? the fetch goes to sub module
 		// all the vars could also be generated (passed object)
 		return  {
+			t : process.env.t,
 			dataList : lists,
 			previews : refPreviews.articles,
 			projectTitle : constants.projectTitle,

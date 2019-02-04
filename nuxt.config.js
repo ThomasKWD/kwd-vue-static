@@ -1,24 +1,43 @@
-import axios from 'axios'
 import constants from './modules/projectConstants'
 import {generateNamedPath} from './modules/routesFromApi'
+import {kwdApiGet,kwdApiInit} from './modules/kwdApi'
+
+/** global constants
+* - very simple concept to prevent juggling around with NODE_ENV
+*   but at the same time constants can already be used in helper functions *inside* 'nuxt.config.js'
+*/
+let env = {
+	referencesPath : 'referenzen/',
+	offersPath : 'leistungen/',
+	blogsPath : 'blog/',
+	t : 'thomas'
+}
+
+kwdApiInit(env)
+
+async function getRoutesFromkwdApi(path,id,type) {
+	return (await kwdApiGet(id,type,'content')).articles.map((cat) => {
+		// cat.namedPath = generateNamedPath(cat.id) // ! defined field not used...
+		return {
+			// route : '/'+path+'/' + cat.id, //sub_article.namedPath
+			route : `/${path}${cat.id}`, //sub_article.namedPath
+			payload : cat
+		}
+	})
+}
 
 module.exports = {
 	/*
 	** Modules
 	*/
 	// modules: [
-	// 	// '~/modules/kwdApiGet',
+	// 	'~/modules/kwdApi',
 	// 	'@nuxtjs/axios'
 	// ],
 	// plugins: [
 	// 	'~/plugins/axios'
 	// ],
-	env: {
-		API_URL: constants.baseUrl,
-		API_BROWSER_URL: '/',
-		baseUrl: constants.baseUrl,
-		browserBaseUrl: constants.baseUrl
-	},
+	env: env, // ! cool code; just means assign local closure var -- see start of this file
 	/*
 	** api presets go into $axios
 	*/
@@ -58,40 +77,15 @@ module.exports = {
 	*/
 	generate : {
 		routes:  async function() {
-			// article 3 contains list of sub categories of "References"
-			// ??? centralized const def. in project (also for pages generation)
-			// ??? you could build up the entire redaxo hierchy as routes
+			// ??? you could build up the entire redaxo hierchy as routes -- and have just 1 '_.vue' file
 			// ??? try to use the titles for paths, not just ids, for this make own converter from title
 			//     better: have a metainfo field in Redaxo which - if set - contains title for URL, otherwise build from normal title of article
 
-			// ??? why does promise not work anymore
-			// let referencesRoutes = axios.get('https://www.kuehne-webdienste.de/api/categories/3/articles/contents')
-			// .then(({data}) => {
-			// 	console.log('XXXXXXXXXXXXXXXX')
-			// 	return data.categories.map((cat) => {
-			// 		console.log(`cat ${cat.id}`)
-			// 		// cat.namedPath = generateNamedPath(cat.id) // ! defined field not used...
-			// 		return {
-			// 			route : '/'+constants.referencesPathName+'/' + cat.id, //sub_article.namedPath
-			// 			payload : {}
-			// 		}
-			// 	})
-			// })
-			// .catch((problem) => {
-			// 	console.log(problem)
-			// })
+			let routes = await getRoutesFromkwdApi(env.referencesPath,3,'catList') // internally 'content' by default
+			routes = routes.concat(await getRoutesFromkwdApi(env.offersPath,4,'catList'))
+			routes = routes.concat(await getRoutesFromkwdApi(env.blogsPath,21,'artList'))
 
-			let {data} = await axios.get('https://www.kuehne-webdienste.de/api/categories/3/articles/contents')
-
-			let referencesRoutes = data.categories.map((cat) => {
-				// cat.namedPath = generateNamedPath(cat.id) // ! defined field not used...
-				return {
-					route : '/'+constants.referencesPathName+'/' + cat.id, //sub_article.namedPath
-					payload : cat
-				}
-			})
-
-			referencesRoutes.push({
+			routes.push({
 				route : '/newcat',
 				payload : {
 					id : 1234,
@@ -106,7 +100,7 @@ module.exports = {
 				}
 			})
 
-			return referencesRoutes
+			return routes
 		}
 	},
 

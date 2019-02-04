@@ -1,14 +1,24 @@
 import axios from 'axios'
 // ?? remove constants when env works
-import constants from '~/modules/projectConstants'
+import constants from './projectConstants'
 // ??? use env??
 // ??? different languages not yet supported
+let myEnv = {}
+
+export function kwdApiInit(newEnv) {
+	// that's closure fun
+	// if (typeof newEnv === 'object') myEnv = newEnv;
+	myEnv = newEnv
+}
 
 // ??? cannot work for article from news because it is article from an artList
 export async function kwdApiGet(id,type,includes) {
-	// ??? consider try catch
 
+	// ??? consider try catch
+	// if (typeof process.env.referencesPath === 'undefined') throw new Error('Thomas, this is not e registered module')
 	// ! planned
+	console.log(myEnv.t)
+
 	if (!includes) includes = ''; // in case invalid string passed
 	let requestContent = (includes.indexOf('content') > -1) ? true : false;
 	let requestMetaData = (includes.indexOf('meta') > -1) ? true : false;

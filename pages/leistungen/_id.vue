@@ -10,7 +10,7 @@
 
 <script>
 import constants from '~/modules/projectConstants'
-import {kwdApiGet} from '~/modules/kwdApiGet'
+import {kwdApiGet} from '~/modules/kwdApi'
 
 export default {
 	async asyncData(context) {
@@ -20,10 +20,8 @@ export default {
 		var data = {};
 		// ! payload is only for 'nuxt generate' you will need to access axios directly when "nuxt"
 		if (context.payload) {
-			throw new Error('must be implemented!! in leistungen/_id.vue')
 			// data = context.payload.sub_article;
 			data = context.payload;
-			console.log('context.payload found')
 			console.log(`payload for offer ${data.id} found`)
 		}
 		else {

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {kwdApiGet} from '~/modules/kwdApi'
 
 export default {
 	// ??? check out how to use payload in conjunction with 'kwdApiGet'
@@ -24,32 +24,18 @@ export default {
 		// ! payload is only for 'nuxt generate' you will need to access axios directly when "nuxt"
 		if (context.payload) {
 			// data = context.payload.sub_article;
+			// ??? must use map function like in kwdApiGet
 			data = context.payload;
 			console.log(`payload for reference ${data.id} found`)
 			// console.log(context.payload)
 		}
 		else {
-			try {
-
-				result = await axios.get(`https://www.kuehne-webdienste.de/api/categories/${context.params.id}/0/articles/contents`)
-				data = result.data;
-				data.body = data.articles[0].body // ! articles[0] could be undefined
-			}
-			catch (e) {
-				data.categories = []
-				data.name = 'Referenz'
-				data.body = '<p>[Daten für diese Seite konnten nicht geladen werden.]</p>'
-			}
+			data = await kwdApiGet(context.params.id,'article')
 		}
 
-		// const {data} = null;
-		// var data;
-		// }
-		// console.log(context);
-		// since there is no real marker (except checking the names of the root categories) we still need to hard code the id of entry point
-
-		// we should:
-		// - extract and copy images
+		// ??? we should:
+		// ??? - extract and copy images
+		// ??? make redaxo:// rpelacements in module
 
 		// TODO: provide this as a separate module to be used in several templates
 		if (typeof data.body !== 'undefined') {

@@ -19,7 +19,7 @@ actually you would need a base page template (see layouts) which contains struct
 
 <script>
 // ??? try to make api call in card
-import {kwdApiGet} from '~/modules/kwdApiGet'
+import {kwdApiGet} from '~/modules/kwdApi'
 import ListArticles from '~/components/ListArticles.vue'
 
 export default {

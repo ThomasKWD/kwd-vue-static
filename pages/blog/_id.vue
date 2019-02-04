@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {kwdApiGet} from '~/modules/kwdApiGet'
+import {kwdApiGet} from '~/modules/kwdApi'
 import constants from '~/modules/projectConstants'
 var cmsPosts = require('extended-netlify-cms-loader?collection=blog!../../static/admin/config.yml')
 
@@ -39,7 +39,6 @@ export default {
 		if (context.payload) {
 			// data = context.payload.sub_article;
 			data = context.payload;
-			console.log('context.payload found')
 			console.log(`payload for blog ${data.id} found`)
 		}
 		else {

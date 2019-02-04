@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {kwdApiGet} from '~/modules/kwdApiGet'
+import {kwdApiGet} from '~/modules/kwdApi'
 
 export default {
 	asyncData : async () => await kwdApiGet(2,'article'),

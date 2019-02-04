@@ -16,7 +16,7 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 </template>
 
 <script>
-import {kwdApiGet} from '~/modules/kwdApiGet'
+import {kwdApiGet} from '~/modules/kwdApi'
 import ListArticles from '~/components/ListArticles.vue'
 
 export default {
