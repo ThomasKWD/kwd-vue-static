@@ -2,7 +2,7 @@
 <template>
 	<main class="page">
 		<article class="offers-post">
-			<h1>{{title}}</h1>
+			<h1>{{name}}</h1>
 			<div class="post-body" v-html="body"></div>
 		</article>
 	</main>
@@ -10,7 +10,7 @@
 
 <script>
 import constants from '~/modules/projectConstants'
-import axios from 'axios';
+import {kwdApiGet} from '~/modules/kwdApiGet'
 
 export default {
 	async asyncData(context) {
@@ -20,14 +20,14 @@ export default {
 		var data = {};
 		// ! payload is only for 'nuxt generate' you will need to access axios directly when "nuxt"
 		if (context.payload) {
+			throw new Error('must be implemented!! in leistungen/_id.vue')
 			// data = context.payload.sub_article;
 			data = context.payload;
 			console.log('context.payload found')
 			console.log(`payload for offer ${data.id} found`)
 		}
 		else {
-			result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
-			data = result.data;
+			data = await kwdApiGet(context.params.id,'article')
 		}
 
 		// TODO: provide this as a separate module to be used in several templates
@@ -53,7 +53,7 @@ export default {
 	// },
 	head () {
 		return {
-			title : this.title
+			title : this.name
 		}
 	}
 }

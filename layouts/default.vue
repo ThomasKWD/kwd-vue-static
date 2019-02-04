@@ -28,6 +28,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/_colors';
+@import '../assets/_shapes';
 
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -114,9 +115,18 @@ a {
 		box-shadow: 0 5px 7px rgba(0,0,0,0.25) inset;
 	}
 }
+
 .btn--inverse {
 	background-color: $colorKwdBlue;
 	color: $colorKwdBlue;
+}
+
+// ??? make component from it
+.warning {
+	@include blockShape;
+	border-top-right-radius: 5px;
+	padding: 30px;
+	color:red;
 }
 
 

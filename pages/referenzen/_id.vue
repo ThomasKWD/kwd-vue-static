@@ -14,19 +14,7 @@
 import axios from 'axios'
 
 export default {
-	// mounted ({params}) {
-	// 	axios
-	// 		// .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-	// 		.get('https://www.kuehne-webdienste.de/api/articles/'+params.id+'/content') // default language
-	//         .then(response => (reference = response.data))
-	// },
-	// data () {
-	// 	return {
-	// 		reference : null
-	// 	}
-	// }
-
-	// async asyncData({params}) {
+	// ??? check out how to use payload in conjunction with 'kwdApiGet'
 	async asyncData(context) {
 
 		var result;

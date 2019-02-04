@@ -1,10 +1,11 @@
 ??? read
 <template>
-	<main class="page">
-		<article class="blog-post">
+	<main class="blog-page page">
+		<article class="blog-post post">
 			<h1>{{name}}</h1>
 			<div class="post-body" v-html="body"></div>
 		</article>
+		<div class="warning">Kann nichts anzeigen, da <b>redaxo4_api_json</b> auf den neuesten Stand gebracht werden muss.</div>
 	</main>
 </template>
 
@@ -95,7 +96,38 @@ export default {
 }
 </script>
 
-<style>
+
+<style lang="scss">
+@import '../../assets/_shapes';
+
+// ??? you really should make a general page layout OR a mech to include all the styles
+.page {
+	@include blockShapeBottom;
+
+	post {
+		h1 {
+			font-weight: normal;
+			font-size: 200%;
+			margin-bottom: 1em;
+		}
+
+		.referenz-illu {
+			float: left;
+			margin-right:30px;
+			margin-bottom: 30px;
+		}
+	}
+	post::after {
+		content: " ";
+		clear:both;
+		float:none;
+		display: table;
+		width:1px;
+		height:1px;
+		opacity: 0.01;
+	}
+}
+
 /* although better if code itself would be removed */
 /* the cool thing is that these comments are not in the resulting css */
 .blueimp-gallery {

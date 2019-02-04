@@ -11,7 +11,7 @@ IDEA: combine blog entries from static _posts (netlify) and dynamic api content 
 	you have to integrate the list of found blog entries in the custom routes definition (nuxt.config.js)
 -->
 <template>
-	<main class="blog-page page">
+	<main class="reference-page page">
 		<h1>Blog</h1>
 		<nav>
 			<ul>
@@ -38,3 +38,26 @@ export default {
 		}
 	}
 }</script>
+
+
+<style lang="scss">
+@import '../../assets/_shapes';
+
+// ??? you really should make a general page layout OR a mech to include all the styles
+.page {
+	@include blockShapeBottom;
+
+	h1 {
+		font-weight: normal;
+		font-size: 200%;
+		margin-bottom: 1em;
+	}
+}
+
+/* although better if code itself would be removed */
+/* the cool thing is that these comments are not in the resulting css */
+.blueimp-gallery {
+	display:none;
+}
+
+	</style>

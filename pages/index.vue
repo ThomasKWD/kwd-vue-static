@@ -60,6 +60,8 @@ export default {
 
 		let lists = [];
 
+		// ??? try to make everything but the id + type inside cards
+		// ??? params could even be saved as {id:21,type:'artList'}
 		lists.push(await kwdApiGet(21,'artList'))
 		lists.push(await kwdApiGet(4,'catList'))
 		lists.push(await kwdApiGet(3,'catList'))

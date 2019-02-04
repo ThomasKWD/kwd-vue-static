@@ -9,11 +9,9 @@
 	</main>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
 	async asyncData(context) {
-
+		// ??? you could check parameters and react ro route in nuxt-links
 		var result;
 		var data = {};
 

@@ -22,6 +22,18 @@ export async function kwdApiGet(id,type,includes) {
 	else if (type === 'artList') req += constants.pathExtensionArticles;
 
 	// console.log(`built uri: ${req}`)
+			//
+			// try {
+			//
+			// 	data  = await axios.get('https://www.kuehne-webdienste.de/api/articles/4/1').data // without body content
+			// 	if (!Array.isArray(data.categories)) data.categories = []
+			//
+			// }
+			// catch (e) {
+			// 	console.log(e)
+			// 	data.name = 'Keine Daten'
+			// 	data.categories = []
+			// }
 
 	// shorten axios get call by pre defining axios.create like in:
 	// https://github.com/davidroyer/nuxt-api-example/
@@ -43,6 +55,7 @@ export async function kwdApiGet(id,type,includes) {
 		}
 	}
 	else if (type === 'article') {
+		// only first article
 		return data.articles[0]
 	}
 
