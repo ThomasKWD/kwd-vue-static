@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import constants from '~/modules/projectConstants'
 import ContentCard from '~/components/ContentCard.vue'
 
 export default {
@@ -21,7 +20,7 @@ export default {
 		let imageLinkCheck = firstImageUrl.exec(pBody);
 		let imageLink
 		if (imageLinkCheck !== null && imageLinkCheck[1]) {
-			imageLink = constants.basePath + imageLinkCheck[1].replace('&amp;','&')
+			imageLink = process.env.basePath + imageLinkCheck[1].replace('&amp;','&')
 		}
 		else {
 			imageLink = '';
@@ -37,7 +36,7 @@ export default {
 			// cardTitle : 'previewContent.articles[0].name',
 			body : previewContent.body,
 			sub_title : '',
-			continueLink : `/${constants.referencesPathName}/${previewContent.d}`,
+			continueLink : `/${process.env.referencesPath}${previewContent.id}`,
 			// ??? actually want to download images
 			imageLink : imageLink
 		}

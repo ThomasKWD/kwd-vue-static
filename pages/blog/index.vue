@@ -41,7 +41,7 @@ export default {
 
 
 <style lang="scss">
-@import '../../assets/_shapes';
+@import '~assets/_shapes';
 
 // ??? you really should make a general page layout OR a mech to include all the styles
 .page {

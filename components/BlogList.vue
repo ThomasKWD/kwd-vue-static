@@ -18,9 +18,7 @@ Displays preview list of blogs, which can be used on different pages
 
 <script>
 var cmsPosts = require('extended-netlify-cms-loader?collection=blog!../static/admin/config.yml')
-import projectConstants from '~/modules/projectConstants'
 
-// console.log(`found ID base ${projectConstants.netlifyBlogStartId}`)
 
 // TODO: should provide separate module to have logic in one place
 //       something like "blogReader", that can be used by BlogArticle or BlogList or other views
@@ -30,7 +28,7 @@ var i;
 
 for (i=0; i < cmsPosts.length; i++) {
 	// TODO: make ids > 10000 to be distinguished from redaxo articles
-	cmsPosts[i].id = projectConstants.netlifyBlogStartId+1+i;
+	cmsPosts[i].id = process.env.netlifyBlogStartId+1+i;
 }
 
 export default {

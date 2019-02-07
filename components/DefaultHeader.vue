@@ -19,12 +19,11 @@
 </template>
 
 <script>
-import constants from '~/modules/projectConstants'
 
 export default {
 	data() {
 		return {
-			title : constants.projectTitle
+			title : process.env.projectTitle
 		}
 	}
 }

@@ -7,11 +7,13 @@ TODO: preload custum routes as described in tutorial and pass already fetched co
 -->
 <template>
 	<main class="references-page page">
-		<list-articles
+		<div class="container-grid-3">
+			<list-articles
 			cat-type="referenzen"
 			v-bind:article-data="articles"
-		></list-articles>
-		-- just need the .card-container here
+			></list-articles>
+			
+		</div>
 	</main>
 </template>
 
@@ -31,3 +33,7 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+@import '~assets/_container';
+</style>

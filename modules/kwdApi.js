@@ -1,74 +1,63 @@
 import axios from 'axios'
-// ?? remove constants when env works
-// import constants from './projectConstants'
-
-// ??? use env??
 // ??? different languages not yet supported
-// let myEnv = {}
-
-// export function kwdApiInit(newEnv) {
-// 	// that's closure fun
-// 	// if (typeof newEnv === 'object') myEnv = newEnv;
-// 	myEnv = newEnv
-// 	console.log('inside kwdApiInit')
-// }
-
-// ??? cannot work for article from news because it is article from an artList
 // - gets env passed when used inside nuxt.config.js for routes; avoiding a closure
 export async function kwdApiGet(id,type,includes,env) {
 
+	let data,req;
+
 	// ??? consider try catch
-	// if (typeof process.env.referencesPath === 'undefined') throw new Error('Thomas, this is not e registered module')
-	// ! planned
-	// env = env || process.env
-	// ! strange consturction due to 'process.env' NOT being a real object but parsed during render
+	// ! strange construction due to 'process.env' NOT being a real object but parsed during render
 	//   hence we can only handle sub fields of process.env
 	let myEnv = env ? env.api : process.env.api
-	// if (env) {
-	// 	myEnv = env;
-	// }
-	// else {
-	// 	myEnv = {
-	// 		t : process.env.t,
-	// 		// ??? we could improve this by putting an object in process.env
-	// 		basePathCategories : process.env.basePathCategories,
-	// 		pathExtensionArticles : process.env.pathExtensionArticles,
-	// 	}
-	// }
-
-
-	// console.log(process.env.t)
-	// if (env) console.log(env.t)
+	if (!myEnv) throw new Error('my env is needed for api')
 
 	if (!includes) includes = ''; // in case invalid string passed
-	let requestContent = (includes.indexOf('content') > -1) ? true : false;
-	let requestMetaData = (includes.indexOf('meta') > -1) ? true : false;
+	let requestContent = (includes.indexOf(myEnv.types.includeContent) > -1) ? true : false;
+	let requestMetaData = (includes.indexOf(myEnv.types.includeMeta) > -1) ? true : false;
 
-	// this.options contains nuxt.config.js
-	//req = 'categories/articles/contents' // test
-	let req = myEnv.basePathCategories
-	req += id || '';
-	// don't need articles if list of cats:
-	if (requestContent || type === 'article') req += myEnv.pathExtensionArticlesWithBody;
-	else if (type === 'artList') req += myEnv.pathExtensionArticles;
+	req = myEnv.basePathCategories
+	if (type === myEnv.types.article) req = myEnv.basePathArticles
 
-	// console.log(`built uri: ${req}`)
-			//
-			// try {
-			//
-			// 	data  = await axios.get('https://www.kuehne-webdienste.de/api/articles/4/1').data // without body content
-			// 	if (!Array.isArray(data.categories)) data.categories = []
-			//
-			// }
-			// catch (e) {
-			// 	console.log(e)
-			// 	data.name = 'Keine Daten'
-			// 	data.categories = []
-			// }
+	req += id || '' // prevent 'undefined' or other useless things
 
-	// shorten axios get call by pre defining axios.create like in:
-	// https://github.com/davidroyer/nuxt-api-example/
-	let {data} = await axios.get(req)
+	// ??? you can write this shorter
+	if (type ===  myEnv.types.catList) {
+		if (requestContent) req += myEnv.pathExtensionArticlesWithBody
+	}
+	else if (type === myEnv.types.artList) {
+		if (requestContent) req += myEnv.pathExtensionArticlesWithBody
+		else req += myEnv.pathExtensionArticles
+	}
+	else /* if (type === 'article') */ req += myEnv.pathExtensionBody
+
+
+	// console.log(`built uri: ${req}, type:${type}`)
+	// console.log(`env: ${myEnv.basePathCategories}`)
+
+	try {
+		let res = await axios.get(req)
+		data = res.data
+	}
+	catch(e) {
+		console.log(e)
+		console.log('...catched error and set default data ')
+		data = {
+			id : id,
+			name : 'error',
+			body : e.message + 'request:' + req
+		}
+	}
+
+	if (!data) {
+		data = {
+			id : id,
+			name : `try id:${id}`,
+			body : `not found in ${req}`
+		}
+	}
+	else {
+		if (typeof data.body === 'undefined') data.body = `body not found in ${req}`
+	}
 
 	// now reduce data
 	if (type === 'catList') {
@@ -87,7 +76,8 @@ export async function kwdApiGet(id,type,includes,env) {
 	}
 	else if (type === 'article') {
 		// only first article
-		return data.articles[0]
+		return data
+		// return data.articles[0]
 	}
 
 	// catch(e) {

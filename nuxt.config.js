@@ -12,25 +12,33 @@ const env = {
 	basePath : kwdApiBase,
 	mediaPath : kwdApiBase + 'files/',
 
-	pathExtensionBody : '/contents',
-
 	referencesPath : 'referenzen/',
 	offersPath : 'leistungen/',
 	blogsPath : 'blog/',
 
+	netlifyBlogStartId : 1000,
+
 	// all that are needed inside 'kwdApiGet()' before nuxt compiled i.e. here
 	api : {
+		types : {
+			catList : 'catList',
+			artList : 'artList',
+			article : 'article',
+			includeContent : 'content',
+			includeMeta : 'meta'
+		},
 		basePathCategories : kwdApiBase + 'api/categories/',
+		basePathArticles : kwdApiBase + 'api/articles/',
 		pathExtensionArticles : '/articles',
+		pathExtensionBody : '/contents',
 		pathExtensionArticlesWithBody : '/articles/contents',
-
 	}
 }
 
 // kwdApiInit(env)
 
 async function getRoutesFromkwdApi(path,id,type) {
-	return (await kwdApiGet(id,type,'content',env)).articles.map((cat) => {
+	return (await kwdApiGet(id,type,env.api.types.includeContent,env)).articles.map((cat) => {
 		// cat.namedPath = generateNamedPath(cat.id) // ! defined field not used...
 		return {
 			// route : '/'+path+'/' + cat.id, //sub_article.namedPath
@@ -95,9 +103,9 @@ module.exports = {
 			// ??? try to use the titles for paths, not just ids, for this make own converter from title
 			//     better: have a metainfo field in Redaxo which - if set - contains title for URL, otherwise build from normal title of article
 
-			let routes = await getRoutesFromkwdApi(env.referencesPath,3,'catList') // internally 'content' by default
-			routes = routes.concat(await getRoutesFromkwdApi(env.offersPath,4,'catList'))
-			routes = routes.concat(await getRoutesFromkwdApi(env.blogsPath,21,'artList'))
+			let routes = await getRoutesFromkwdApi(env.referencesPath,3,env.api.types.catList) // internally 'content' by default
+			routes = routes.concat(await getRoutesFromkwdApi(env.offersPath,4,env.api.types.catList))
+			routes = routes.concat(await getRoutesFromkwdApi(env.blogsPath,21,env.api.types.artList))
 
 			routes.push({
 				route : '/newcat',

@@ -9,11 +9,12 @@ actually you would need a base page template (see layouts) which contains struct
 <template>
 	<main class="offers-page page">
 		<h1>Leistungen</h1>
-		<list-articles
+		<div class="container-grid-3">
+			<list-articles
 			cat-type="leistungen"
 			v-bind:article-data="articles"
-		></list-articles>
-		-- just need the .card-container here
+			></list-articles>
+		</div>
 	</main>
 </template>
 
@@ -33,3 +34,8 @@ export default {
 		}
 	}
 }</script>
+
+<style lang="scss">
+@import '~assets/_container';
+
+</style>

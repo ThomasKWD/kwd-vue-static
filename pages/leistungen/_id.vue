@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import constants from '~/modules/projectConstants'
 import {kwdApiGet} from '~/modules/kwdApi'
 
 export default {

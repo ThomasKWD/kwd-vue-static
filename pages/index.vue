@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import constants from '~/modules/projectConstants'
 import AppLogo from '~/components/AppLogo.vue'
 import PageFooter from '~/components/DefaultFooter.vue' //you can use any name
 import ListArticles from '~/components/ListArticles.vue'
@@ -84,7 +83,7 @@ export default {
 			t : process.env.t,
 			dataList : lists,
 			previews : refPreviews.articles,
-			projectTitle : constants.projectTitle,
+			projectTitle : process.env.projectTitle,
 			otherIndexSubHeading : 'This must become a list of arts'
 			// markdownBlog : cmsPosts[0].body
 			// markdownBlogHtml : md.render(cmsPosts[0].body)

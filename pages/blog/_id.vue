@@ -5,13 +5,11 @@
 			<h1>{{name}}</h1>
 			<div class="post-body" v-html="body"></div>
 		</article>
-		<div class="warning">Kann nichts anzeigen, da <b>redaxo4_api_json</b> auf den neuesten Stand gebracht werden muss.</div>
 	</main>
 </template>
 
 <script>
 import {kwdApiGet} from '~/modules/kwdApi'
-import constants from '~/modules/projectConstants'
 var cmsPosts = require('extended-netlify-cms-loader?collection=blog!../../static/admin/config.yml')
 
 var markDownIt = require('markdown-it')
@@ -32,9 +30,8 @@ export default {
 	// },
 	async asyncData(context) {
 
-		var result;
-		// ! only working, if var is named 'data'
-		var data = {};
+		let data = {};
+
 		// ! payload is only for 'nuxt generate' you will need to access axios directly when "nuxt"
 		if (context.payload) {
 			// data = context.payload.sub_article;
@@ -42,10 +39,10 @@ export default {
 			console.log(`payload for blog ${data.id} found`)
 		}
 		else {
-			if (context.params.id > constants.netlifyBlogStartId) {
+			if (context.params.id > process.env.netlifyBlogStartId) {
 				// console.log(`found constants.netlifyBlogStartId: ${context.params.id}`)
 				// var data = BlogList.data().blogs[context.params.id - constants.netlifyBlogStartId -1 ]; // -1 because its an index
-				data = cmsPosts[context.params.id - constants.netlifyBlogStartId -1];
+				data = cmsPosts[context.params.id - process.env.netlifyBlogStartId -1];
 				// // TODO: resolve missing body problem (worked before)
 				// console.log(`postData.body: ${data.body}`)
 				// if (typeof data.body !== 'undefined') data.body = md.render(data.body); // ! ovewrites itself with "Markdown" rendered content
@@ -61,8 +58,7 @@ export default {
 				data.body = ''
 			}
 			else {
-				// result = await axios.get(`https://www.kuehne-webdienste.de/api/articles/${context.params.id}/1/content`)
-				data = kwdApiGet(context.params.id,'article');
+				data = await kwdApiGet(context.params.id,'article');
 			}
 		}
 
@@ -82,6 +78,7 @@ export default {
 			data.body = data.body.replace(/redaxo:\/\/12"/g,'/referenzen/12"');// shuri ryu test fake
 			data.body = data.body.replace(/redaxo:\/\/(.*)"/g,'/blog/$1"');
 		}
+
 		return data; // ! data Object returned directly thus just include the fields e.g. {{title}}
 	},
 	// components : {
